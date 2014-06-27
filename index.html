@@ -23,22 +23,23 @@
             <ul class="nav navbar-nav">
 
                 <div>
-                    <div class="btn-group">
-                        <label class="btn btn-primary" ng-model="sortField" btn-radio="'address'">City</label>
-                        <label class="btn btn-primary" ng-model="sortField" btn-radio="'firstname'">First Name</label>
-                        <label class="btn btn-primary" ng-model="sortField" btn-radio="'lastname'">Last Name</label>
-                    </div>
+                  <pre>{{ascending}} {{ directionalSort }}</pre>
+                  <div class="btn-group">
+                    <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" ng-init="ascending = true" btn-radio="'address'">City</label>
+                    <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" btn-radio="'firstname'">First Name</label>
+                    <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" btn-radio="'lastname'">Last Name</label>
                 </div>
-            </ul>
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
-                </div>
-            </form>
-        </div>
-        <!-- /.navbar-collapse -->
+            </div>
+        </ul>
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+            </div>
+        </form>
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.navbar-collapse -->
+</div>
+<!-- /.container-fluid -->
 </nav>
 <body ng-controller="demoController">
     <p>This lesson shows the use of the Angular Cloud Data Connector. It loads property information from Windows Azure Mobile Services.</p>
@@ -54,30 +55,48 @@
             </div>
         </div>
     </div>
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
-    <script src="http://angularclouddataconnector.azurewebsites.net/0.1/acdc.js" data-require="AngularCloudDataConnector@0.0.1" data-semver="0.0.1"></script>
-    <script src="http://angularclouddataconnector.azurewebsites.net/0.1/azureDataService.js" data-require="AngularCloudDataConnector@0.0.1" data-semver="0.0.1"></script>
+    <script src="https://angularclouddataconnector.azurewebsites.net/0.1/acdc.js" data-require="AngularCloudDataConnector@0.0.1" data-semver="0.0.1"></script>
+    <script src="https://angularclouddataconnector.azurewebsites.net/0.1/azureDataService.js" data-require="AngularCloudDataConnector@0.0.1" data-semver="0.0.1"></script>
     <script>
-    var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'ui.bootstrap']);
-    app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
-      function($scope, dataService, azureDataService) {
-        $scope.greeting = "Hello Data!";
-        azureDataService.addSource('https://angularpeople.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
-        dataService.addSource(azureDataService);
-        dataService.connect(function(results) {
-          for (var result in results) {
-            $scope.$apply($scope[result] = results[result]);
-          }
+        var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'ui.bootstrap']);
+        app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
+          function($scope, dataService, azureDataService) {
+            $scope.greeting = "Hello Data!";
+            azureDataService.addSource('https://angularpeople.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
+            dataService.addSource(azureDataService);
+            dataService.connect(function(results) {
+              for (var result in results) {
+                $scope.$apply($scope[result] = results[result]);
+            }
         });
 
-        $scope.sortField = 'firstname';
+            $scope.sortField = 'firstname';
 
-      }
+            $scope.ascending = false;
 
-    ]);
-    </script>
+            $scope.$watch('sortField', function() {
+                $scope.ascending = true;
+            });
+
+            $scope.$watch(function() {
+              return $scope.sortField + $scope.ascending;
+          }, function() {
+             if ($scope.ascending) {
+               $scope.directionalSort = '+'+$scope.sortField;
+           } else {
+               $scope.directionalSort = '-'+$scope.sortField;
+           }
+           
+       })
+
+        }
+
+        ]);
+</script>
 </body>
+
 </html>
