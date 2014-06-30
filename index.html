@@ -27,17 +27,17 @@
                     <div>
                         <pre>{{ascending}} {{ directionalSort }}</pre>
                         <div class="btn-group">
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" ng-init="ascending = true" btn-radio="'address1'">
+                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending[0] = !ascending[0]; currentColumn = 0" btn-radio="'address1'">
                                 City
-                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending, 'glyphicon-chevron-up': ascending}"></i>
+                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending[0], 'glyphicon-chevron-up': ascending[0]}"></i>
                             </label>
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" btn-radio="'firstname'">
+                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending[1] = !ascending[1]; currentColumn = 1" btn-radio="'firstname'">
                                 First Name
-                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending, 'glyphicon-chevron-up': ascending}"></i>
+                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending[1], 'glyphicon-chevron-up': ascending[1]}"></i>
                             </label>
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" btn-radio="'lastname'">
+                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending[2] = !ascending[2]; currentColumn = 2" btn-radio="'lastname'">
                                 Last Name
-                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending, 'glyphicon-chevron-up': ascending}"></i>
+                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending[2], 'glyphicon-chevron-up': ascending[2]}"></i>
                             </label>
                         </div>
                     </div>
@@ -114,16 +114,19 @@
 
             $scope.sortField = 'firstname';
 
-            $scope.ascending = false;
+            $scope.ascending = [true, true, true];
+            $scope.currentColumn = 0;
 
-            $scope.$watch('sortField', function() {
-                $scope.ascending = true;
+            $scope.$watch('sortField', function () {
+                for (i = 0; i < ascending.length; i++) {
+                    $scope.ascending[i] = true;
+                }
             });
 
             $scope.$watch(function() {
               return $scope.sortField + $scope.ascending;
           }, function() {
-             if ($scope.ascending) {
+              if ($scope.ascending[$scope.currentColumn]) {
                $scope.directionalSort = '+'+$scope.sortField;
            } else {
                $scope.directionalSort = '-'+$scope.sortField;
