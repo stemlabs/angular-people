@@ -26,10 +26,14 @@
                   <pre>{{ascending}} {{ directionalSort }}</pre>
                   <div class="btn-group">
                     <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" ng-init="ascending = true" btn-radio="'address'">City
-                    <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending, 'glyphicon-chevron-up': ascending}"></i>
+                        <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending, 'glyphicon-chevron-up': ascending}"></i>
                     </label>
-                    <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" btn-radio="'firstname'">First Name</label>
-                    <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" btn-radio="'lastname'">Last Name</label>
+                    <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" btn-radio="'firstname'">First Name
+                        <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending, 'glyphicon-chevron-up': ascending}"></i>
+                    </label>
+                    <label class="btn btn-primary" ng-model="sortField" ng-click="ascending = !ascending" btn-radio="'lastname'">Last Name
+                        <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending, 'glyphicon-chevron-up': ascending}"></i>
+                    </label>
                 </div>
             </div>
         </ul>
