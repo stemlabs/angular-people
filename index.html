@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="demoApp">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
@@ -68,12 +68,12 @@
 
     <div class="well form-horizontal">
 
-        <legend>New person</legend>
+        <legend>Add Person</legend>
         <input type="text" ng-model='newPerson.firstname' class="form-control" placeholder="First Name" />
         <input type="text" ng-model='newPerson.lastname' class="form-control" placeholder="Last Name" />
         <input type="text" ng-model='newPerson.address1' class="form-control" placeholder="Address" />
 
-        <button class="btn btn-default" ng-click="add('people', newPerson)">Add</button>
+        <button class="btn btn-default" ng-click="add('people', newPerson)" onClick="alert('New person added!')">Add</button>
 
     </div>
 
