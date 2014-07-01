@@ -1,77 +1,114 @@
 <!DOCTYPE html>
 <html ng-app="demoApp">
 <head>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
-    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
+  <style>
+    .card:hover
+    {
+      -webkit-box-shadow: 10px 12px 27px 9px rgba(0,0,0,0.13);
+      -moz-box-shadow: 10px 12px 27px 9px rgba(0,0,0,0.13);
+      box-shadow: 10px 12px 27px 9px rgba(0,0,0,0.13);
+    }
+
+    .btn
+    {
+      border-radius: 0px;
+    }
+    .navbar-brand
+    {
+      margin-top: -3px;
+    }
+  </style>
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+  <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
 </head>
 <body ng-controller="demoController">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Contact Cards</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <div>
-                        <div class="btn-group">
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'address1'">
-                                City
-                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='address1' && ascending"></i>
-                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='address1' && !ascending"></i>
-                            </label>
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'firstname'">
-                                First Name
-                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
-                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
-                            </label>
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending=!ascending; currentColumn = 2" btn-radio="'lastname'">
-                                Last Name
-                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
-                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
-                            </label>
-                        </div>
-                    </div>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
-                    </div>
-                </form>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-    <p>This lesson shows the use of the Angular Cloud Data Connector. It loads property information from Windows Azure Mobile Services.</p>
-    <div ng-container>
-        <div class="row">
-            <div ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-                <div class="col-sm-6 col-md-4 col-lg-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}</div>
-                        <div class="panel-body">{{ person.address1 }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div ng-show = "menu == 'main'">
+      <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+
+              <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Contact Cards</a>
+                  <button id = "button-nav-group" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <div>
+                          <div class="btn-group">
+                              <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'address1'">
+                                  City
+                                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='address1' && ascending"></i>
+                                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='address1' && !ascending"></i>
+                              </label>
+                              <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'firstname'">
+                                  First Name
+                                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
+                                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
+                              </label>
+                              <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending; currentColumn = 2" btn-radio="'lastname'">
+                                  Last Name
+                                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
+                                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
+                              </label>
+                              <label class = "btn btn-lg" ng-click = "menu = 'add'">Add</label>
+                          </div>
+                          
+                      </div>
+                  </ul>
+                  <form class="navbar-form navbar-right" role="search">
+                      <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+                      </div>
+                  </form>
+              </div>
+              <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container-fluid -->
+      </nav>
+      <!-- <p>This lesson shows the use of the Angular Cloud Data Connector. It loads property information from Windows Azure Mobile Services.</p> -->
+      <div ng-container>
+          <div class="row">
+              <div ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+                  <div class="col-sm-6 col-md-4 col-lg-2" ng-click = "edit(person)">
+                      <div class="panel panel-default card">
+                          <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}</div>
+                          <div class="panel-body">{{ person.address1 }}</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
     </div>
-    <div class="well form-horizontal">
+
+    <div ng-show = "menu == 'edit'">
+      <div class = "well form-horizontal">
+        <input id = "first-name-edit" type="text" ng-model='newPerson.firstname' class="form-control" placeholder="First Name" />
+        <input id = "last-name-edit" type="text" ng-model='newPerson.lastname' class="form-control" placeholder="Last Name" />
+        <input id = "address-edit" type="text" ng-model='newPerson.lastname' class="form-control" placeholder="Address" />
+        <button class="btn btn-default" ng-click="">Change</button>
+        <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
+      </div>
+    </div>
+
+    <div ng-show = "menu == 'add'">
+      <div class="well form-horizontal">
         <legend>Add Person</legend>
         <input type="text" ng-model='newPerson.firstname' class="form-control" placeholder="First Name" />
         <input type="text" ng-model='newPerson.lastname' class="form-control" placeholder="Last Name" />
         <input type="text" ng-model='newPerson.address1' class="form-control" placeholder="Address" />
         <button class="btn btn-default" ng-click="add('people', newPerson)">Add</button>
-    </div>
+        <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
+      </div>
+    </div>      
+
     <script src="https://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
@@ -87,6 +124,7 @@
             $scope.sortField = 'firstname';
             $scope.ascending = true;
             $scope.currentColumn = 0;
+            $scope.menu = "main";
 
             //function to add a new data entry
             $scope.add = function (tableName, entity) {
@@ -97,6 +135,8 @@
                 , function () {
                     console.log('Problem Adding the Data.')
                 })
+
+                $scope.menu = "main";
             };
 
             //function to sync the data
@@ -119,6 +159,16 @@
                         $scope.$apply($scope[result] = results[result]);
                     }
                 });
+            }
+
+            $scope.edit = function(person)
+            {
+              //alert(JSON.stringify(person));
+              $('#first-name-edit').val(person.firstname);
+              $('#last-name-edit').val(person.lastname);
+              $('#address-edit').val(person.address);
+
+              $scope.menu = "edit"; 
             }
 
             $scope.watchbuttons = function () {
