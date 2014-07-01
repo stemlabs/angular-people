@@ -82,84 +82,68 @@
 
     <script>
         var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'ui.bootstrap']);
-    app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
-        function($scope, dataService, azureDataService) 
-        {
+        app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
+        function ($scope, dataService, azureDataService) {
             //define global scope variables
             $scope.sortField = 'firstname';
             $scope.ascending = true;
             $scope.currentColumn = 0;
 
             //function to add a new data entry
-            $scope.add = function (tableName, entity) 
-            {
-                dataService.add(tableName, entity, function () 
-                {
+            $scope.add = function (tableName, entity) {
+                dataService.add(tableName, entity, function () {
                     //updates the data after you add data
                     $scope.sync();
                 }
-                , function () 
-                {
+                , function () {
                     console.log('Problem Adding the Data.')
                 })
             };
 
             //function to sync the data
-            $scope.sync = function () 
-            {
-                dataService.getEntries(function (results) 
-                { 
-                    for (var result in results) 
-                    {
+            $scope.sync = function () {
+                dataService.getEntries(function (results) {
+                    for (var result in results) {
                         $scope.$apply($scope[result] = results[result]);
                     }
                 });
             }
-            
+
             //function to intialize the connection
-            $scope.initialize = function()
-            {
+            $scope.initialize = function () {
 
                 azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
                 dataService.addSource(azureDataService);
-                dataService.connect(function(results) 
-                {
+                dataService.connect(function (results) {
                     //sync after the initial response
-                    for (var result in results) 
-                    {
+                    for (var result in results) {
                         $scope.$apply($scope[result] = results[result]);
                     }
                 });
             }
 
-            $scope.watchbuttons = function ()
-            {
-              $scope.$watch('sortField', function () 
-              {
-                  $scope.ascending = true;
-              });
+            $scope.watchbuttons = function () {
+                $scope.$watch('sortField', function () {
+                    $scope.ascending = true;
+                });
 
-              $scope.$watch(function () 
-              {
-                  return $scope.sortField + $scope.ascending;
-              }
-              , function () 
-              {
-                  if ($scope.ascending) 
-                  {
-                      $scope.directionalSort = '+' + $scope.sortField;
-                  } else 
-                  {
-                      $scope.directionalSort = '-' + $scope.sortField;
-                  }
+                $scope.$watch(function () {
+                    return $scope.sortField + $scope.ascending;
+                }
+                , function () {
+                    if ($scope.ascending) {
+                        $scope.directionalSort = '+' + $scope.sortField;
+                    } else {
+                        $scope.directionalSort = '-' + $scope.sortField;
+                    }
 
-              })
+                })
             }
 
             $scope.initialize();
             $scope.watchbuttons();
         }
-    ]);
+        ]);
     </script>
 </body>
 </html>
