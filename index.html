@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="demoApp">
 <head>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
 </head>
-
 <body ng-controller="demoController">
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
@@ -21,23 +21,24 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                 <ul class="nav navbar-nav">
-
                     <div>
-                        <pre>{{ascending}} {{ directionalSort }}</pre>
+                        <pre>{{ascending}} {{sortField}} {{ directionalSort }}</pre>
                         <div class="btn-group">
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending[0] = !ascending[0]; currentColumn = 0" btn-radio="'address1'">
+                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'address1'">
                                 City
-                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending[0], 'glyphicon-chevron-up': ascending[0]}"></i>
+                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='address1' && ascending"></i>
+                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='address1' && !ascending"></i>
                             </label>
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending[1] = !ascending[1]; currentColumn = 1" btn-radio="'firstname'">
+                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'firstname'">
                                 First Name
-                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending[1], 'glyphicon-chevron-up': ascending[1]}"></i>
+                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
+                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
                             </label>
-                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending[2] = !ascending[2]; currentColumn = 2" btn-radio="'lastname'">
+                            <label class="btn btn-primary" ng-model="sortField" ng-click="ascending=!ascending; currentColumn = 2" btn-radio="'lastname'">
                                 Last Name
-                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': !ascending[2], 'glyphicon-chevron-up': ascending[2]}"></i>
+                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
+                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
                             </label>
                         </div>
                     </div>
@@ -65,18 +66,13 @@
             </div>
         </div>
     </div>
-
     <div class="well form-horizontal">
-
         <legend>Add Person</legend>
         <input type="text" ng-model='newPerson.firstname' class="form-control" placeholder="First Name" />
         <input type="text" ng-model='newPerson.lastname' class="form-control" placeholder="Last Name" />
         <input type="text" ng-model='newPerson.address1' class="form-control" placeholder="Address" />
-
-        <button class="btn btn-default" ng-click="add('people', newPerson)" onClick="alert('New person added! Refresh page to update.')">Add</button>
-
+        <button class="btn btn-default" ng-click="add('people', newPerson)" onclick="alert('New person added! Refresh page to update.')">Add</button>
     </div>
-
     <script src="https://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
@@ -86,57 +82,55 @@
     <script>
         var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'ui.bootstrap']);
         app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
-          function($scope, dataService, azureDataService) {
-            $scope.greeting = "Hello Data!";
+          function ($scope, dataService, azureDataService) {
+              $scope.greeting = "Hello Data!";
 
-            $scope.add = function(tableName, entity) {
-              dataService.add(tableName, entity, function() {
-                $scope.sync();
-              }, function() {
-                $scope.errorMessage = "Error while creating entity...";
+              $scope.add = function (tableName, entity) {
+                  dataService.add(tableName, entity, function () {
+                      $scope.sync();
+                  }, function () {
+                      $scope.errorMessage = "Error while creating entity...";
+                  })
+              };
+              $scope.sync = function () {
+                  dataService.add(tableName, entity, function () {
+                      $scope.sync();
+                  }, function () {
+                      $scope.errorMessage = "Error while creating entity...";
+                  })
+              };
+
+              azureDataService.addSource('https://angularpeople.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
+              dataService.addSource(azureDataService);
+              dataService.connect(function (results) {
+                  for (var result in results) {
+                      $scope.$apply($scope[result] = results[result]);
+                  }
+              });
+
+              $scope.sortField = 'firstname';
+
+              $scope.ascending = true;
+              $scope.currentColumn = 0;
+
+              $scope.$watch('sortField', function () {
+                  $scope.ascending = true;
+              });
+
+              $scope.$watch(function () {
+                  return $scope.sortField + $scope.ascending;
+              }, function () {
+                  if ($scope.ascending) {
+                      $scope.directionalSort = '+' + $scope.sortField;
+                  } else {
+                      $scope.directionalSort = '-' + $scope.sortField;
+                  }
+
               })
-            };
-            $scope.sync = function() {
-              dataService.add(tableName, entity, function() {
-                $scope.sync();
-              }, function() {
-                $scope.errorMessage = "Error while creating entity...";
-              })
-            };
 
-            azureDataService.addSource('https://angularpeople.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
-            dataService.addSource(azureDataService);
-            dataService.connect(function(results) {
-              for (var result in results) {
-                $scope.$apply($scope[result] = results[result]);
-            }
-        });
-
-            $scope.sortField = 'firstname';
-
-            $scope.ascending = [true, true, true];
-            $scope.currentColumn = 0;
-
-            $scope.$watch('sortField', function () {
-                for (i = 0; i < ascending.length; i++) {
-                    $scope.ascending[i] = true;
-                }
-            });
-
-            $scope.$watch(function() {
-              return $scope.sortField + $scope.ascending;
-          }, function() {
-              if ($scope.ascending[$scope.currentColumn]) {
-               $scope.directionalSort = '+'+$scope.sortField;
-           } else {
-               $scope.directionalSort = '-'+$scope.sortField;
-           }
-           
-       })
-
-        }
+          }
 
         ]);
-</script>
+    </script>
 </body>
 </html>
