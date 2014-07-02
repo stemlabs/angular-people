@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html ng-app="demoApp">
+
 <head>
   <style>
-    .card:hover
-    {
-      -webkit-box-shadow: 10px 12px 27px 9px rgba(0,0,0,0.13);
-      -moz-box-shadow: 10px 12px 27px 9px rgba(0,0,0,0.13);
-      box-shadow: 10px 12px 27px 9px rgba(0,0,0,0.13);
+    .card: hover {
+      -webkit-box-shadow: 10px 12px 27px 9px rgba(0, 0, 0, 0.13);
+      -moz-box-shadow: 10px 12px 27px 9px rgba(0, 0, 0, 0.13);
+      box-shadow: 10px 12px 27px 9px rgba(0, 0, 0, 0.13);
     }
-
-    .btn
-    {
+    .btn {
       border-radius: 0px;
     }
-    .navbar-brand
-    {
+    .navbar-brand {
       margin-top: -3px;
     }
   </style>
@@ -23,207 +20,200 @@
   <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
   <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
 </head>
+
 <body ng-controller="demoController">
-    <div ng-show = "menu == 'main'">
-      <nav class="navbar navbar-default" role="navigation">
-          <div class="container-fluid">
-              <!-- Brand and toggle get grouped for better mobile display -->
+  <div ng-show="menu == 'main'">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
 
-              <div class="navbar-header">
-                  <a class="navbar-brand" href="#">Contact Cards</a>
-                  <button id = "button-nav-group" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                  </button>
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Contact Cards</a>
+          <button id="button-nav-group" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <div>
+              <div class="btn-group">
+                <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'address1'">
+                  City
+                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='address1' && ascending"></i>
+                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='address1' && !ascending"></i>
+                </label>
+                <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'firstname'">
+                  First Name
+                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
+                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
+                </label>
+                <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending; currentColumn = 2" btn-radio="'lastname'">
+                  Last Name
+                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
+                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
+                </label>
+                <label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
               </div>
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav">
-                      <div>
-                          <div class="btn-group">
-                              <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'address1'">
-                                  City
-                                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='address1' && ascending"></i>
-                                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='address1' && !ascending"></i>
-                              </label>
-                              <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'firstname'">
-                                  First Name
-                                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
-                                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
-                              </label>
-                              <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending; currentColumn = 2" btn-radio="'lastname'">
-                                  Last Name
-                                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
-                                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
-                              </label>
-                              <label class = "btn btn-lg" ng-click = "menu = 'add'">Add</label>
-                          </div>
-                          
-                      </div>
-                  </ul>
-                  <form class="navbar-form navbar-right" role="search">
-                      <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
-                      </div>
-                  </form>
-              </div>
-              <!-- /.navbar-collapse -->
+
+            </div>
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+            </div>
+          </form>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <!-- <p>This lesson shows the use of the Angular Cloud Data Connector. It loads property information from Windows Azure Mobile Services.</p> -->
+    <div ng-container>
+      <div class="row">
+        <div ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+          <div class="col-sm-6 col-md-4 col-lg-2" ng-click="Edit(person)">
+            <div class="panel panel-default card">
+              <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}</div>
+              <div class="panel-body">{{ person.address1 }}</div>
+            </div>
           </div>
-          <!-- /.container-fluid -->
-      </nav>
-      <!-- <p>This lesson shows the use of the Angular Cloud Data Connector. It loads property information from Windows Azure Mobile Services.</p> -->
-      <div ng-container>
-          <div class="row">
-              <div ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-                  <div class="col-sm-6 col-md-4 col-lg-2" ng-click = "edit(person)">
-                      <div class="panel panel-default card">
-                          <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}</div>
-                          <div class="panel-body">{{ person.address1 }}</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div ng-show = "menu == 'edit'">
-      <div class = "well form-horizontal">
-        <input id = "first-name-edit" type="text" ng-model='edit.firstname' class="form-control" placeholder="First Name" />
-        <input id = "last-name-edit" type="text" ng-model='edit.lastname' class="form-control" placeholder="Last Name" />
-        <input id = "address-edit" type="text" ng-model='edit.address' class="form-control" placeholder="Address" />
-        <button class="btn btn-default" ng-click="confirmedit('people', person)">Change</button>
-        <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
-      </div>
+  <div ng-show="menu == 'edit'">
+    <div class="well form-horizontal">
+      <input id="first-name-edit" type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+      <input id="last-name-edit" type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+      <input id="address-edit" type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+      <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
+      <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
+      <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
     </div>
+  </div>
 
-    <div ng-show = "menu == 'add'">
-      <div class="well form-horizontal">
-        <legend>Add Person</legend>
-        <input type="text" ng-model='newPerson.firstname' class="form-control" placeholder="First Name" />
-        <input type="text" ng-model='newPerson.lastname' class="form-control" placeholder="Last Name" />
-        <input type="text" ng-model='newPerson.address1' class="form-control" placeholder="Address" />
-        <button class="btn btn-default" ng-click="add('people', newPerson)">Add</button>
-        <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
-      </div>
-    </div>      
+  <div ng-show="menu == 'add'">
+    <div class="well form-horizontal">
+      <legend>Add Person</legend>
+      <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+      <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+      <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+      <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
+      <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
+    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
 
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.3/AngularCloudDataConnector.js"></script>
-    <!-- this does not work now -->
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.3/Providers/AzureService.js"></script>
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.3/AngularCloudDataConnector.js"></script>
+  <!-- this does not work now -->
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.3/Providers/AzureService.js"></script>
 
-    <script>
-        var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'ui.bootstrap']);
-        app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
-        function ($scope, dataService, azureDataService) {
-            //define global scope variables
-            $scope.sortField = 'firstname';
-            $scope.ascending = true;
-            $scope.currentColumn = 0;
-            $scope.menu = "main";
+  <script>
+    var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'ui.bootstrap']);
+    app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
+      function($scope, dataService, azureDataService) {
+        //define global scope variables
+        $scope.sortField = 'firstname';
+        $scope.ascending = true;
+        $scope.currentColumn = 0;
+        $scope.menu = "main";
 
-            //function to add a new data entry
-            $scope.add = function (tableName, entity) {
-                dataService.add(tableName, entity, function () {
-                    //updates the data after you add data
-                    $scope.sync();
-                }
-                , function () {
-                    console.log('Problem Adding the Data.')
-                })
+        $scope.Delete = function(tableName, entity) {
+          dataService.remove(tableName, entity, function() {
+            //updates the data after you add data
+            $scope.sync();
+          }, function() {
+            console.log('Problem removing the data.')
+          });
 
-                $scope.menu = "main";
-            };
+          $scope.menu = "main";
+          $scope.currentEdit = {};
+        };
 
-            //function to sync the data
-            $scope.sync = function () {
-                dataService.getEntries(function (results) {
-                    for (var result in results) {
-                        $scope.$apply($scope[result] = results[result]);
-                    }
-                });
+        //function to add a new data entry
+        $scope.Add = function(tableName, entity) {
+          dataService.add(tableName, entity, function() {
+            //updates the data after you add data
+            $scope.sync();
+          }, function() {
+            console.log('Problem adding data.')
+          });
+
+          $scope.menu = "main";
+          $scope.currentEdit = {};
+        };
+
+        $scope.Change = function(tableName, entity) {
+          dataService.update(tableName, entity, function() {
+            $scope.sync();
+          }, function() {
+            console.log('Problem updating data.')
+          });
+          $scope.menu = "main";
+          $scope.currentEdit = {};
+          
+        };
+
+        //function to sync the data
+        $scope.sync = function() {
+          dataService.getEntries(function(results) {
+            for (var result in results) {
+              $scope.$apply($scope[result] = results[result]);
             }
-
-            //function to intialize the connection
-            $scope.initialize = function () {
-
-                azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
-                dataService.addSource(azureDataService);
-                dataService.connect(function (results) {
-                    //sync after the initial response
-                    for (var result in results) {
-                        $scope.$apply($scope[result] = results[result]);
-                    }
-                });
-            }
-
-            $scope.edit = function(person)
-            {
-              $scope.menu = "edit"; 
-              console.log(person);
-              $scope.currentlyediting = person;
-              $scope.currentlyediting.firstname = person.firstname;
-              $scope.currentlyediting.lastname = person.lastname;
-              $scope.currentlyediting.address = person.address;
-              //alert(JSON.stringify(person));
-              $scope.edit.firstname = $scope.currentlyediting.firstname;
-              $scope.edit.lastname = $scope.currentlyediting.lastname;
-              $scope.edit.address = $scope.currentlyediting.address1;
-            }
-
-            $scope.editdata = function (tableName, entity) 
-            {
-              dataService.update(tableName, entity, function () 
-              {
-                $scope.sync();
-              }
-              , function () 
-              {
-                console.log('Problem add data.')
-              })
-            };
-
-            $scope.confirmedit = function ()
-            {
-
-              $scope.currentlyediting.firstname = $scope.edit.firstname;
-              $scope.currentlyediting.lastname = $scope.edit.lastname;
-              $scope.currentlyediting.address1 = $scope.edit.address;
-
-              //automatically syncs after edit
-              $scope.editdata('people', $scope.currentlyediting);
-
-              $scope.menu = "main"; 
-            }
-
-            $scope.watchbuttons = function () {
-                $scope.$watch('sortField', function () {
-                    $scope.ascending = true;
-                });
-
-                $scope.$watch(function () {
-                    return $scope.sortField + $scope.ascending;
-                }
-                , function () {
-                    if ($scope.ascending) {
-                        $scope.directionalSort = '+' + $scope.sortField;
-                    } else {
-                        $scope.directionalSort = '-' + $scope.sortField;
-                    }
-
-                })
-            }
-
-            $scope.initialize();
-            $scope.watchbuttons();
+          });
         }
-        ]);
-    </script>
+
+        //function to intialize the connection
+        $scope.initialize = function() {
+
+          azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
+          dataService.addSource(azureDataService);
+          dataService.connect(function(results) {
+            //sync after the initial response
+            for (var result in results) {
+              $scope.$apply($scope[result] = results[result]);
+            }
+          });
+        }
+
+        $scope.Edit = function(person) {
+          console.log(person);
+          $scope.menu = "edit";
+          $scope.currentEdit = person;
+        }
+
+
+        $scope.watchbuttons = function() {
+          $scope.$watch('sortField', function() {
+            $scope.ascending = true;
+          });
+
+          $scope.$watch(function() {
+            return $scope.sortField + $scope.ascending;
+          }, function() {
+            if ($scope.ascending) {
+              $scope.directionalSort = '+' + $scope.sortField;
+            } else {
+              $scope.directionalSort = '-' + $scope.sortField;
+            }
+
+          })
+        }
+
+        $scope.initialize();
+        $scope.watchbuttons();
+      }
+    ]);
+  </script>
 </body>
+
 </html>
