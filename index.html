@@ -122,7 +122,7 @@
             <div class="panel panel-default card">
               <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
               <div ng-hide = "person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-              <div ng-hide = "person.homephone == '' || person.homephone == null" class="panel-body">{{ person.homephone }}</div>
+              <div ng-hide = "person.homephone == '' || person.homephone == null" class="panel-body"><a href = "tel:{{person.homephone}}">{{ person.homephone }}</a></div>
               <div ng-hide = "person.email == '' || person.email == null" class="panel-body"><a href = "mailto:{{person.email}}">{{ person.email }}</a></div>
             </div>
           </div>
