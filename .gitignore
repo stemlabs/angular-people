@@ -1,3 +1,6 @@
 # Custom to angular-people
 
 node_modules/
+/VisualStudio/StemLabsWebApp/obj/Debug
+*.suo
+/VisualStudio/StemLabsWebApp/StemLabsWebApp.csproj.user
