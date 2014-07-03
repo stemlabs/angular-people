@@ -34,6 +34,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,6 +58,17 @@
                   <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
                   <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
                 </label>
+                <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending;" btn-radio="'email'">
+                  Email
+                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='email' && ascending"></i>
+                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='email' && !ascending"></i>
+                </label>
+                <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending;" btn-radio="'homephone'">
+                  Phone
+                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='homephone' && ascending"></i>
+                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='homephone' && !ascending"></i>
+                </label>
+
                 <label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
               </div>
 
@@ -79,6 +92,8 @@
             <div class="panel panel-default card">
               <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}</div>
               <div class="panel-body">{{ person.address1 }}</div>
+              <div class="panel-body">{{ person.homephone }}</div>
+              <div class="panel-body">{{ person.email }}</div>
             </div>
           </div>
         </div>
@@ -88,9 +103,12 @@
 
   <div ng-show="menu == 'edit'">
     <div class="well form-horizontal">
-      <input id="first-name-edit" type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
-      <input id="last-name-edit" type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
-      <input id="address-edit" type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+      <legend>Edit Person</legend>
+      <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+      <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+      <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+      <input  type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+      <input  type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
       <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
       <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
       <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
@@ -103,6 +121,8 @@
       <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
       <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
       <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+      <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+      <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
       <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
       <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
     </div>
