@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html ng-app="demoApp">
+<html ng-app="app">
 
 <head>
-  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
-  <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
   <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
   <style>
+    #loading
+    {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+    }
     .main-container
     {
       margin-right: 10px;
       margin-left: 10px;
+      display: block;
     }
     .glyphicon-edit:hover 
     {
@@ -53,12 +56,12 @@
   </style>
 </head>
 
-<body ng-controller="demoController">
+<body ng-controller="controller">
+  <div id = "loading" ng-show="menu=='loading'">Loading...
+  </div>
   <div ng-show="menu == 'main'">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Contact Cards<sub>v4.2</sub></a>
           <button id="button-nav-group" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -70,17 +73,16 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <div>
               <div class="btn-group">
-                <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending" btn-radio="'firstname'">
+                <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
                   First Name
                   <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
                   <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
                 </label>
-                <label class="btn btn-lg" ng-model="sortField" ng-click="ascending=!ascending; currentColumn = 2" btn-radio="'lastname'">
+                <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
                   Last Name
                   <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
                   <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
@@ -95,26 +97,20 @@
             </div>
           </form>
         </div>
-        <!-- /.navbar-collapse -->
       </div>
-      <!-- /.container-fluid -->
     </nav>
-    <!-- <p>This lesson shows the use of the Angular Cloud Data Connector. It loads property information from Windows Azure Mobile Services.</p> -->
-    <div class = "main-container">
-      <div class="row">
-        <div ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-          <div class="col-sm-6 col-md-4 col-lg-2">
-            <div class="panel panel-default card">
-              <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-              <div ng-hide = "person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-              <div ng-hide = "person.homephone == '' || person.homephone == null" class="panel-body"><a href = "tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-              <div ng-hide = "person.email == '' || person.email == null" class="panel-body"><a href = "mailto:{{person.email}}">{{ person.email }}</a></div>
-            </div>
-          </div>
+    <masonry ng-masonary class = "main-container">
+      <div class = "masonry-brick" style = "width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+        <div class = "panel panel-default card">
+          <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+          <div ng-hide = "person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+          <div ng-hide = "person.homephone == '' || person.homephone == null" class="panel-body"><a href = "tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+          <div ng-hide = "person.email == '' || person.email == null" class="panel-body"><a href = "mailto:{{person.email}}">{{ person.email }}</a></div>
         </div>
       </div>
-    </div>
+    </masonry>
   </div>
+
 
   <div ng-show="menu == 'edit'">
     <div class="well form-horizontal edit">
@@ -147,24 +143,30 @@
     </div>
   </div>
 
+  <!-- Core Functionality -->
+  <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
 
-  <script src="https://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
+  <!-- ACDC Data Services -->
   <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
 
-  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.3/AngularCloudDataConnector.js"></script>
-  <!-- this does not work now -->
-  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.3/Providers/AzureService.js"></script>
+  <!-- Masonry sorting data -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+  <script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
+  <script src="angular-masonry.js"></script>
 
   <script>
-    var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'ui.bootstrap']);
-    app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
+    var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule']);
+    app.controller('controller', ['$scope', 'dataService', 'azureDataService',
       function($scope, dataService, azureDataService) {
         //define global scope variables
         $scope.sortField = 'firstname';
         $scope.ascending = true;
         $scope.currentColumn = 0;
-        $scope.menu = "main";
+        $scope.menu = "loading";
 
         $scope.Delete = function(tableName, entity) {
           dataService.remove(tableName, entity, function() {
@@ -203,7 +205,9 @@
         };
 
         //function to sync the data
-        $scope.sync = function() {
+        $scope.sync = function() 
+        {
+          // alert("sync");
           dataService.getEntries(function(results) {
             for (var result in results) {
               $scope.$apply($scope[result] = results[result]);
@@ -212,20 +216,19 @@
         }
 
         //function to intialize the connection
-        $scope.initialize = function() {
-
+        $scope.initialize = function() 
+        {
+          // alert("initialize");
           azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
           dataService.addSource(azureDataService);
-          dataService.connect(function(results) {
-            //sync after the initial response
-            for (var result in results) {
-              $scope.$apply($scope[result] = results[result]);
-            }
-          });
+          dataService.connect(function(results) 
+          {
+            $scope.menu = "main";
+            console.log("Data Loaded From Database.");
+          }, $scope, 2);
         }
 
         $scope.Edit = function(person) {
-          console.log(person);
           $scope.menu = "edit";
           $scope.currentEdit = person;
         }
