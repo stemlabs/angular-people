@@ -93,18 +93,45 @@
         <!-- <p>This lesson shows the use of the Angular Cloud Data Connector. It loads property information from Windows Azure Mobile Services.</p> -->
         <div class="main-container">
             <div class="row">
-                <div ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-                    <div class="col-sm-6 col-md-4 col-lg-2">
-                        <div class="panel panel-default card">
-                            <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-                            <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-                            <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-                            <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+                <div class="col-md-10">
+                    <div ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="panel panel-default card">
+                                <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+                                <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+                                <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+                                <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div ng-repeat="tweet in tweets">
+                        <div class="col-sm-6 col-md-4 col-lg-2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color: #75b5ff">
+                                    <p>
+                                        <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
+                                        as {{tweet.user.screen_name}}</font>
+                                    </p>
+                                </div>
+                                <div class="panel-body">
+                                    {{tweet.text}}
+                                </div>
+                                <div class="panel-footer">
+                                    <div>
+                                        <p class="text-left">
+                                            <font color="24558F">Location:</font> {{tweet.user.location}}
+                                        </p>
+                                    </div>
+                                    <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+       </div>
     </div>
 
     <div ng-show="menu == 'edit'">
@@ -140,12 +167,13 @@
 
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" ></script>
-    <script src="https://code.jquery.com/jquery-2.0.3.min.js" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" ></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
+    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.3/Providers/TwitterService.js"></script>
 
     <script>
         var app = angular.module('demoApp', ['DataModule', 'AzureDataModule']);
