@@ -188,11 +188,11 @@
     <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.3/Providers/TwitterService.js"></script>
+    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
 
     <script>
-        var app = angular.module('demoApp', ['DataModule', 'AzureDataModule']);
-        app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
+        var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'TwitterDataModule']);
+        app.controller('demoController', ['$scope', 'dataService', 'azureDataService', 'twitterDataService'
           function ($scope, dataService, azureDataService) {
               //define global scope variables
               $scope.sortField = 'firstname';
@@ -250,6 +250,9 @@
 
                   azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
                   dataService.addSource(azureDataService);
+                  twitterDataService.HashTag = '@stemlabs';
+                  dataService.addSource(azureDataService);
+                  
                   dataService.connect(function (results) {
                       console.log('Data Loaded.');
                   }, $scope, 2);
