@@ -207,7 +207,9 @@
 
                   azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
                   dataService.addSource(azureDataService);
-                  dataService.connect(function (results) {}, $scope, 2);   
+                  dataService.connect(function (results) {
+                      console.log('Data Loaded.');
+                  }, $scope, 2);
               }
 
               $scope.Edit = function (person) {
