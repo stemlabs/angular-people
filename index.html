@@ -122,7 +122,7 @@
             </div>
                 <div class="col-md-2">
                     <div ng-repeat="tweet in tweets">
-                        <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading" style="background-color: #75b5ff">
                                     <p>
@@ -192,8 +192,8 @@
 
     <script>
         var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'TwitterDataModule']);
-        app.controller('demoController', ['$scope', 'dataService', 'azureDataService', 'twitterDataService'
-          function ($scope, dataService, azureDataService) {
+        app.controller('demoController', ['$scope', 'dataService', 'azureDataService', 'twitterDataService',
+          function ($scope, dataService, azureDataService, twitterDataService) {
               //define global scope variables
               $scope.sortField = 'firstname';
               $scope.ascending = true;
@@ -250,12 +250,12 @@
 
                   azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
                   dataService.addSource(azureDataService);
-                  twitterDataService.HashTag = '@stemlabs';
-                  dataService.addSource(azureDataService);
+                  twitterDataService.HashTag = 'stemlabs';
+                  dataService.addSource(twitterDataService);
                   
                   dataService.connect(function (results) {
                       console.log('Data Loaded.');
-                  }, $scope, 2);
+                  }, $scope, 3);
               }
 
               $scope.Edit = function (person) {
