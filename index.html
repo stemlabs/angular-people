@@ -3,68 +3,76 @@
 
 <head>
   <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
+  <!-- <link href="C:\Users\hal9000\Documents\bootstrap\css\bootstrap.css" rel="stylesheet" /> -->
   <style>
-    #loading
-    {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-    }
-    .main-container
-    {
+        .main-container {
       margin-right: 10px;
       margin-left: 10px;
       display: block;
     }
-    .glyphicon-edit:hover 
-    {
+
+        .glyphicon-edit:hover {
       -webkit-transition: color 1s;
       transition: color 1s;
       cursor: pointer;
       color: lightblue;
     }
 
+    #loading
+    {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+    }
+
     .navbar-brand {
-        margin-top: -3px;
+            margin-top: 0px;
     }
 
-    .card div {
-        margin: 0px;
-        padding: 5px;
+        .card div {
+      margin: 0px;
+      padding: 5px;
     }
 
-    .card {
-        padding: 0px;
-        margin: 5px;
+        .panel-heading {
+            font-size: 16px;
+        }
+
+        .card {
+      padding: 0px;
+      margin: 5px;
     }
 
-    .add input, .edit input {
-        margin-top: 5px;
+        .add input, .edit input {
+      margin-top: 5px;
     }
 
-    .glyphicon-edit {
-        -webkit-transition: color 1s;
-        transition: color 1s;
-        color: black;
-        float: right;
-        z-index: 2;
+        .glyphicon-edit {
+      -webkit-transition: color 1s;
+      transition: color 1s;
+      color: black;
+      float: right;
+      z-index: 2;
     }
 
-    .circle {
-      border-radius: 50%;
-      width: 200px;
-      height: 200px; 
-      /* width and height can be anything, as long as they're equal */
+    body {
+        padding-top: 55px;
     }
-    </style>
+
+    @media screen and (max-width: 768px) {
+        body {
+            padding-top: 63px;
+        }
+    }
+  </style>
 </head>
 
-<body ng-controller="controller">
-  <div class = "circle" id = "loading" ng-show="menu=='loading'">Loading...
-  </div>
+<body id = "loading" ng-controller="controller">
+  <div ng-show = "menu == 'loading'">Loading...</div>
   <div ng-show="menu == 'main'">
-    <nav class="navbar navbar-default" role="navigation">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Contact Cards<sub>v4.2</sub></a>
           <button id="button-nav-group" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -106,15 +114,13 @@
       <div class = "masonry-brick" style = "width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
         <div class = "panel panel-default card">
           <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-          <div ng-hide = "person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+          <div ng-hide = "person.address1 == '' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
           <div ng-hide = "person.homephone == '' || person.homephone == null" class="panel-body"><a href = "tel:{{person.homephone}}">{{ person.homephone }}</a></div>
           <div ng-hide = "person.email == '' || person.email == null" class="panel-body"><a href = "mailto:{{person.email}}">{{ person.email }}</a></div>
         </div>
       </div>
     </masonry>
   </div>
-
-
   <div ng-show="menu == 'edit'">
     <div class="well form-horizontal edit">
       <legend>Edit Person</legend>
@@ -129,20 +135,20 @@
         <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
       </div>
     </div>
+  </div>
 
-    <div ng-show="menu == 'add'">
-        <div class="well form-horizontal add">
-            <legend>Add Person</legend>
-            <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
-            <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
-            <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
-            <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
-            <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+  <div ng-show="menu == 'add'">
+    <div class="well form-horizontal add">
+      <legend>Add Person</legend>
+      <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+      <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+      <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+      <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+      <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
             <div style="margin-top: 5px;">
-                <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
-                <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
-            </div>
-        </div>
+        <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
+        <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -176,7 +182,7 @@
             //updates the data after you add data
             $scope.sync();
           }, function() {
-            console.log('Problem removing the data.')
+            console.log('Problem removing the data.');
           });
 
           $scope.menu = "main";
@@ -189,7 +195,7 @@
             //updates the data after you add data
             $scope.sync();
           }, function() {
-            console.log('Problem adding data.')
+            console.log('Problem adding data.');
           });
 
           $scope.menu = "main";
@@ -200,7 +206,7 @@
           dataService.update(tableName, entity, function() {
             $scope.sync();
           }, function() {
-            console.log('Problem updating data.')
+            console.log('Problem updating data.');
           });
           $scope.menu = "main";
           $scope.currentEdit = {};
@@ -253,11 +259,11 @@
 
           })
         }
-
         $scope.initialize();
         $scope.watchbuttons();
       }
       ]);
+
   </script>
 </body>
 
