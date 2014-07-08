@@ -2,58 +2,57 @@
 <html ng-app="app">
 
 <head>
-  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
-  <!-- <link href="C:\Users\hal9000\Documents\bootstrap\css\bootstrap.css" rel="stylesheet" /> -->
-  <style>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
+    <!-- <link href="C:\Users\hal9000\Documents\bootstrap\css\bootstrap.css" rel="stylesheet" /> -->
+    <style>
         .main-container {
-      margin-right: 10px;
-      margin-left: 10px;
-      display: block;
-    }
+            margin-right: 10px;
+            margin-left: 10px;
+            display: block;
+        }
 
         .glyphicon-edit:hover {
-      -webkit-transition: color 1s;
-      transition: color 1s;
-      cursor: pointer;
-      color: lightblue;
-    }
+            -webkit-transition: color 1s;
+            transition: color 1s;
+            cursor: pointer;
+            color: lightblue;
+        }
 
-    #loading
-    {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-    }
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+        }
 
-    .navbar-brand {
+        .navbar-brand {
             margin-top: 0px;
-    }
+        }
 
         .card div {
-      margin: 0px;
-      padding: 5px;
-    }
+            margin: 0px;
+            padding: 5px;
+        }
 
         .panel-heading {
             font-size: 16px;
         }
 
         .card {
-      padding: 0px;
-      margin: 5px;
-    }
+            padding: 0px;
+            margin: 5px;
+        }
 
         .add input, .edit input {
-      margin-top: 5px;
-    }
+            margin-top: 5px;
+        }
 
         .glyphicon-edit {
-      -webkit-transition: color 1s;
-      transition: color 1s;
-      color: black;
-      float: right;
-      z-index: 2;
-    }
+            -webkit-transition: color 1s;
+            transition: color 1s;
+            color: black;
+            float: right;
+            z-index: 2;
+        }
 
         body {
             padding-top: 55px;
@@ -64,70 +63,71 @@
                 padding-top: 63px;
             }
         }
-  </style>
+    </style>
 </head>
 
-<body id = "loading" ng-controller="controller">
-  <div ng-show = "menu == 'loading'">Loading...</div>
-  <div ng-show="menu == 'main'">
+<body id="loading" ng-controller="controller">
+    <div ng-show="menu == 'loading'">Loading...</div>
+
+    <div ng-show="menu == 'main'">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Contact Cards<sub>v4.2</sub></a>
-          <button id="button-nav-group" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <div>
-              <div class="btn-group">
-                <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
-                  First Name
-                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
-                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
-                </label>
-                <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
-                  Last Name
-                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
-                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
-                </label>
-                <label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
-              </div>
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Contact Cards<sub>v4.2</sub></a>
+                    <button id="button-nav-group" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <div>
+                            <div class="btn-group">
+                                <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
+                                    First Name
+                                    <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
+                                    <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
+                                </label>
+                                <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
+                                    Last Name
+                                    <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
+                                    <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
+                                </label>
+                                <label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
+                            </div>
+                        </div>
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+                        </div>
+                    </form>
+                </div>
             </div>
-          </ul>
-          <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
-            </div>
-          </form>
-        </div>
-      </div>
-    </nav>
+        </nav>
+
 
         <div class="main-container">
             <div class="row">
                 <div class="col-md-10">
-                <div ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="panel panel-default card">
-    <masonry ng-masonary class = "main-container">
-      <div class = "masonry-brick" style = "width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-        <div class = "panel panel-default card">
-              <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-                            <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-                            <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-                            <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+
+                    <masonry ng-masonary class="main-container">
+                        <div class="masonry-brick" style="width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+                            <div class="panel panel-default card">
+
+                                <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+                                <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+                                <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+                                <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+                            </div>
                         </div>
-                    </div>
+                    </masonry>
                 </div>
-            </div>
                 <div class="col-md-2">
                     <div ng-repeat="tweet in tweets">
                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -148,166 +148,161 @@
                                         </p>
                                     </div>
                                     <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-      </div>
-    </div>
-    </masonry>
-  </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+                </div>
+            </div>
+
         </div>
     </div>
-       </div>
-    </div>
 
-  <div ng-show="menu == 'edit'">
-    <div class="well form-horizontal edit">
-      <legend>Edit Person</legend>
-      <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
-      <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
-      <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
-      <input  type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
-      <input  type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
-      <div style = "margin-top: 5px;">
-        <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
-        <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
-        <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
-      </div>
-    </div>
-  </div>
-
-  <div ng-show="menu == 'add'">
-    <div class="well form-horizontal add">
-      <legend>Add Person</legend>
-      <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
-      <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
-      <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
-      <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
-      <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+    <div ng-show="menu == 'edit'">
+        <div class="well form-horizontal edit">
+            <legend>Edit Person</legend>
+            <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+            <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+            <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+            <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+            <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
             <div style="margin-top: 5px;">
-        <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
-        <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
-      </div>
+                <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
+                <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
+                <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Core Functionality -->
-  <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+    <div ng-show="menu == 'add'">
+        <div class="well form-horizontal add">
+            <legend>Add Person</legend>
+            <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+            <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+            <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+            <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+            <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+            <div style="margin-top: 5px;">
+                <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
+                <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Functionality -->
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" ></script>
-    <script src="https://code.jquery.com/jquery-2.0.3.min.js" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" ></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
 
-  <!-- Masonry sorting data -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
-  <script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
-  <script src="angular-masonry.js"></script>
+    <!-- Masonry sorting data -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+    <script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
+    <script src="angular-masonry.js"></script>
 
-  <script>
-        var app = angular.module('demoApp', ['DataModule', 'AzureDataModule', 'TwitterDataModule']);
-        app.controller('demoController', ['$scope', 'dataService', 'azureDataService', 'twitterDataService',
-          function ($scope, dataService, azureDataService, twitterDataService) {
-        //define global scope variables
-        $scope.sortField = 'firstname';
-        $scope.ascending = true;
-        $scope.currentColumn = 0;
-        $scope.menu = "loading";
+    <script>
+        var app = angular.module('demoApp', ['DataModule', 'AzureDataModule']);
+        app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
+              function ($scope, dataService, azureDataService) {
+                  //define global scope variables
+                  $scope.sortField = 'firstname';
+                  $scope.ascending = true;
+                  $scope.currentColumn = 0;
+                  $scope.menu = "loading";
 
-        $scope.Delete = function(tableName, entity) {
-          dataService.remove(tableName, entity, function() {
-            //updates the data after you add data
-            $scope.sync();
-          }, function() {
-            console.log('Problem removing the data.');
-          });
+                  $scope.Delete = function (tableName, entity) {
+                      dataService.remove(tableName, entity, function () {
+                          //updates the data after you add data
+                          $scope.sync();
+                      }, function () {
+                          console.log('Problem removing the data.');
+                      });
 
-          $scope.menu = "main";
-          $scope.currentEdit = {};
-        };
+                      $scope.menu = "main";
+                      $scope.currentEdit = {};
+                  };
 
-        //function to add a new data entry
-        $scope.Add = function(tableName, entity) {
-          dataService.add(tableName, entity, function() {
-            //updates the data after you add data
-            $scope.sync();
-          }, function() {
-            console.log('Problem adding data.');
-          });
+                  //function to add a new data entry
+                  $scope.Add = function (tableName, entity) {
+                      dataService.add(tableName, entity, function () {
+                          //updates the data after you add data
+                          $scope.sync();
+                      }, function () {
+                          console.log('Problem adding data.');
+                      });
 
-          $scope.menu = "main";
-          $scope.currentEdit = {};
-        };
+                      $scope.menu = "main";
+                      $scope.currentEdit = {};
+                  };
 
-        $scope.Change = function(tableName, entity) {
-          dataService.update(tableName, entity, function() {
-            $scope.sync();
-          }, function() {
-            console.log('Problem updating data.');
-          });
-          $scope.menu = "main";
-          $scope.currentEdit = {};
+                  $scope.Change = function (tableName, entity) {
+                      dataService.update(tableName, entity, function () {
+                          $scope.sync();
+                      }, function () {
+                          console.log('Problem updating data.');
+                      });
+                      $scope.menu = "main";
+                      $scope.currentEdit = {};
 
-        };
+                  };
 
-        //function to sync the data
-        $scope.sync = function()
-        {
-          // alert("sync");
-          dataService.getEntries(function(results) {
-            for (var result in results) {
-              $scope.$apply($scope[result] = results[result]);
-            }
-          });
-        }
+                  //function to sync the data
+                  $scope.sync = function () {
+                      // alert("sync");
+                      dataService.getEntries(function (results) {
+                          for (var result in results) {
+                              $scope.$apply($scope[result] = results[result]);
+                          }
+                      });
+                  }
 
-        //function to intialize the connection
-        $scope.initialize = function()
-        {
-          // alert("initialize");
-          azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
-          dataService.addSource(azureDataService);
-                  twitterDataService.HashTag = 'stemlabs';
-                  dataService.addSource(twitterDataService);
+                  //function to intialize the connection
+                  $scope.initialize = function () {
+                      // alert("initialize");
+                      azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
+                      dataService.addSource(azureDataService);
+                      dataService.connect(function (results) {
+                          console.log('Data Loaded.');
+                      }, $scope, 2);
+                  }
 
-                  dataService.connect(function (results) {
-                      console.log('Data Loaded.');
-       $scope.menu = "main";
-                  }, $scope, 3);
-        }
-
-        $scope.Edit = function(person) {
-          $scope.menu = "edit";
-          $scope.currentEdit = person;
-        }
+                  $scope.Edit = function (person) {
+                      $scope.menu = "edit";
+                      $scope.currentEdit = person;
+                  }
 
 
-        $scope.watchbuttons = function() {
-          $scope.$watch('sortField', function() {
-            $scope.ascending = true;
-          });
+                  $scope.watchbuttons = function () {
+                      $scope.$watch('sortField', function () {
+                          $scope.ascending = true;
+                      });
 
-          $scope.$watch(function() {
-            return $scope.sortField + $scope.ascending;
-          }, function() {
-            if ($scope.ascending) {
-              $scope.directionalSort = '+' + $scope.sortField;
-            } else {
-              $scope.directionalSort = '-' + $scope.sortField;
-            }
+                      $scope.$watch(function () {
+                          return $scope.sortField + $scope.ascending;
+                      }, function () {
+                          if ($scope.ascending) {
+                              $scope.directionalSort = '+' + $scope.sortField;
+                          } else {
+                              $scope.directionalSort = '-' + $scope.sortField;
+                          }
 
-          })
-        }
-        $scope.initialize();
-        $scope.watchbuttons();
-      }
-    ]);
+                      })
+                  }
+                  $scope.initialize();
+                  $scope.watchbuttons();
+              }
+        ]);
 
-  </script>
+    </script>
 </body>
 
 </html>
