@@ -1,0 +1,12 @@
+{
+	"name": "STEM Labs Contacts",
+	"description": "Contacts browser for STEM Labs members.",
+	"launch_path": "/angular-people/",
+	"developer": {
+	"name": "STEM Labs",
+		"url": "https://stemlabs.github.io/"
+	},
+	"default_locale": "en",
+	"type": "web",
+	"version": 0.1.0
+}
