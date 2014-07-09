@@ -18,8 +18,7 @@
       color: lightblue;
     }
 
-    #loading
-    {
+        #loading {
       position: fixed;
       top: 50%;
       left: 50%;
@@ -62,8 +61,9 @@
   </style>
 </head>
 
-<body id = "loading" ng-controller="controller">
-  <div ng-show = "menu == 'loading'">Loading...</div>
+<body id="loading" ng-controller="controller">
+    <div ng-show="menu == 'loading'">Loading...</div>
+
   <div ng-show="menu == 'main'">
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -105,26 +105,64 @@
         </div>
       </div>
     </nav>
-    <masonry ng-masonary class = "main-container">
-      <div class = "masonry-brick" style = "width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-        <div class = "panel panel-default card">
+
+
+        <div class="main-container">
+            <div class="row">
+                <div class="col-md-10">
+
+                    <masonry ng-masonary class="main-container">
+                        <div class="masonry-brick" style="width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+                            <div class="panel panel-default card">
+
           <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-          <div ng-hide = "person.address1 == '' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-          <div ng-hide = "person.homephone == '' || person.homephone == null" class="panel-body"><a href = "tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-          <div ng-hide = "person.email == '' || person.email == null" class="panel-body"><a href = "mailto:{{person.email}}">{{ person.email }}</a></div>
+                                <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+                                <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+                                <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
         </div>
       </div>
     </masonry>
   </div>
+                <div class="col-md-2">
+                    <div ng-repeat="tweet in tweets">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color: #75b5ff">
+                                    <p>
+                                        <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
+                                        as {{tweet.user.screen_name}}</font>
+                                    </p>
+                                </div>
+                                <div class="panel-body">
+                                    {{tweet.text}}
+                                </div>
+                                <div class="panel-footer">
+                                    <div>
+                                        <p class="text-left">
+                                            <font color="24558F">Location:</font> {{tweet.user.location}}
+                                        </p>
+                                    </div>
+                                    <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
   <div ng-show="menu == 'edit'">
     <div class="well form-horizontal edit">
       <legend>Edit Person</legend>
       <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
       <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
       <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
-      <input  type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
-      <input  type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
-      <div style = "margin-top: 5px;">
+            <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+            <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+            <div style="margin-top: 5px;">
         <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
         <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
         <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
@@ -152,10 +190,14 @@
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
 
-  <!-- ACDC Data Services -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
   <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
   <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
+    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
 
   <!-- Masonry sorting data -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
@@ -163,20 +205,20 @@
   <script src="angular-masonry.js"></script>
 
   <script>
-    var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule']);
-    app.controller('controller', ['$scope', 'dataService', 'azureDataService',
-      function($scope, dataService, azureDataService) {
+        var app = angular.module('demoApp', ['DataModule', 'AzureDataModule']);
+        app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
+              function ($scope, dataService, azureDataService) {
         //define global scope variables
         $scope.sortField = 'firstname';
         $scope.ascending = true;
         $scope.currentColumn = 0;
         $scope.menu = "loading";
 
-        $scope.Delete = function(tableName, entity) {
-          dataService.remove(tableName, entity, function() {
+                  $scope.Delete = function (tableName, entity) {
+                      dataService.remove(tableName, entity, function () {
             //updates the data after you add data
             $scope.sync();
-          }, function() {
+                      }, function () {
             console.log('Problem removing the data.');
           });
 
@@ -185,11 +227,11 @@
         };
 
         //function to add a new data entry
-        $scope.Add = function(tableName, entity) {
-          dataService.add(tableName, entity, function() {
+                  $scope.Add = function (tableName, entity) {
+                      dataService.add(tableName, entity, function () {
             //updates the data after you add data
             $scope.sync();
-          }, function() {
+                      }, function () {
             console.log('Problem adding data.');
           });
 
@@ -197,10 +239,10 @@
           $scope.currentEdit = {};
         };
 
-        $scope.Change = function(tableName, entity) {
-          dataService.update(tableName, entity, function() {
+                  $scope.Change = function (tableName, entity) {
+                      dataService.update(tableName, entity, function () {
             $scope.sync();
-          }, function() {
+                      }, function () {
             console.log('Problem updating data.');
           });
           $scope.menu = "main";
@@ -209,10 +251,9 @@
         };
 
         //function to sync the data
-        $scope.sync = function() 
-        {
+                  $scope.sync = function () {
           // alert("sync");
-          dataService.getEntries(function(results) {
+                      dataService.getEntries(function (results) {
             for (var result in results) {
               $scope.$apply($scope[result] = results[result]);
             }
@@ -220,32 +261,29 @@
         }
 
         //function to intialize the connection
-        $scope.initialize = function() 
-        {
+                  $scope.initialize = function () {
           // alert("initialize");
           azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
           dataService.addSource(azureDataService);
-          dataService.connect(function(results) 
-          {
-            $scope.menu = "main";
-            console.log("Data Loaded From Database.");
+                      dataService.connect(function (results) {
+                          console.log('Data Loaded.');
           }, $scope, 2);
         }
 
-        $scope.Edit = function(person) {
+                  $scope.Edit = function (person) {
           $scope.menu = "edit";
           $scope.currentEdit = person;
         }
 
 
-        $scope.watchbuttons = function() {
-          $scope.$watch('sortField', function() {
+                  $scope.watchbuttons = function () {
+                      $scope.$watch('sortField', function () {
             $scope.ascending = true;
           });
 
-          $scope.$watch(function() {
+                      $scope.$watch(function () {
             return $scope.sortField + $scope.ascending;
-          }, function() {
+                      }, function () {
             if ($scope.ascending) {
               $scope.directionalSort = '+' + $scope.sortField;
             } else {
