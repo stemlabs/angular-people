@@ -22,12 +22,6 @@
             color: lightblue;
         }
 
-        #loading {
-            position: relative;
-            top: 50%;
-            left: 50%;
-        }
-
         .navbar-brand {
             margin-top: 0px;
         }
@@ -68,12 +62,110 @@
             }
         }
     </style>
+      <style>
+    @keyframes loadinganimation
+    {
+      0%  {background-color: lightblue;}
+      30%   {background-color: lightblue;}
+      50%  {background-color: blue;}
+      70% {background-color: lightblue;}
+      100%  {background-color: lightblue;}
+    }
+
+    @-webkit-keyframes loadinganimation /* Safari and Chrome */
+    {
+      0%  {background-color: lightblue;}
+      30%   {background-color: lightblue;}
+      50%  {background-color: blue;}
+      70% {background-color: lightblue;}
+      100%  {background-color: lightblue;}
+    }
+
+    #loadingcontainer
+    {
+      display: inline-block;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+    }
+
+    .loading
+    {
+      z-index: 3;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      height: 20px;
+      width: 20px;
+    }
+
+    .loading.one
+    {
+      left: 37.5%;
+      animation:loadinganimation 1s infinite;
+      -webkit-animation:loadinganimation 1s infinite; /* Safari and Chrome */
+    }
+
+    .loading.two
+    {
+      left: 42.5%;
+      animation:loadinganimation 1s infinite;
+      -webkit-animation:loadinganimation 1s infinite; /* Safari and Chrome */
+
+      -webkit-animation-delay: .16s; /* Safari and Chrome */
+      animation-delay: .16s;
+    }
+
+    .loading.three
+    {
+      left: 47.5%;
+      animation:loadinganimation 1s infinite;
+      -webkit-animation:loadinganimation 1s infinite; /* Safari and Chrome */
+
+      -webkit-animation-delay: .33s; /* Safari and Chrome */
+      animation-delay: .33s;
+    }
+
+    .loading.four
+    {
+      left: 52.5%;
+      animation:loadinganimation 1s infinite;
+      -webkit-animation:loadinganimation 1s infinite; /* Safari and Chrome */
+
+      -webkit-animation-delay: .5s; /* Safari and Chrome */
+      animation-delay: .5s;
+    }
+    .loading.five
+    {
+      left: 57.5%;
+      animation:loadinganimation 1s infinite;
+      -webkit-animation:loadinganimation 1s infinite; /* Safari and Chrome */
+
+      -webkit-animation-delay: .66s; /* Safari and Chrome */
+      animation-delay: .66s;
+    }
+    .loading.six
+    {
+      left: 62.5%;
+      animation:loadinganimation 1s infinite;
+      -webkit-animation:loadinganimation 1s infinite; /* Safari and Chrome */
+
+      -webkit-animation-delay: .86s; /* Safari and Chrome */
+      animation-delay: .86s;
+    }
+  </style>
 </head>
 
 <body ng-controller="controller">
-    <div id="loading" ng-show="menu == 'loading'">Loading...</div>
-
-    <div ng-show="menu == 'main' ">
+        <div id = "loadingcontainer" ng-show = "menu == 'loading'">
+          <div class = "loading one" ></div>
+          <div class = "loading two"></div>
+          <div class = "loading three"></div>
+          <div class = "loading four"></div>
+          <div class = "loading five"></div>
+          <div class = "loading six"></div>
+        </div>
+        <div ng-show="menu == 'main' ">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -201,13 +293,14 @@
 
     <script>
         var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule', 'TwitterDataModule']);
-        app.controller('controller', ['$scope', 'dataService', 'azureDataService', 'twitterDataService',
-              function ($scope, dataService, azureDataService, twitterDataService) {
+        app.controller('controller', ['$scope', '$timeout', 'dataService', 'azureDataService', 'twitterDataService',
+              function ($scope, $timeout, dataService, azureDataService, twitterDataService) {
                   //define global scope variables
                   $scope.sortField = 'firstname';
                   $scope.ascending = true;
                   $scope.currentColumn = 0;
                   $scope.menu = "loading";
+                  var timeout = null;
 
                   $scope.Delete = function (tableName, entity) {
                       dataService.remove(tableName, entity, function () {
@@ -264,7 +357,9 @@
                       dataService.addSource(twitterDataService);
                       dataService.connect(function (results) {
                           console.log('Data Loaded.');
+
                           $scope.$apply($scope.menu = "main");
+
                       }, $scope, 4);
                   }
 
