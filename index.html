@@ -5,17 +5,15 @@
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
     <!-- <link href="C:\Users\hal9000\Documents\bootstrap\css\bootstrap.css" rel="stylesheet" /> -->
     <style>
-    .main-container
-    {
-      margin-right: 10px;
-      margin-left: 10px;
-      display: block;
-    }
+        .main-container {
+            margin-right: 10px;
+            margin-left: 10px;
+            display: block;
+        }
 
-    masonry div
-    {
-      display: block;
-    }
+        masonry div {
+            display: block;
+        }
 
         .glyphicon-edit:hover {
             -webkit-transition: color 1s;
@@ -116,45 +114,42 @@
                 </div>
             </div>
         </nav>
-        <div class = "main-container row">
-          <masonry ng-masonary class="col-lg-8 col-md-8 col-sm-8">
-            <div class = "masonry-brick" style = "width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-              <div class = "panel panel-default card">
-                <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-                <div ng-hide = "person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-                <div ng-hide = "person.homephone == '' || person.homephone == null" class="panel-body"><a href = "tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-                <div ng-hide = "person.email == '' || person.email == null" class="panel-body"><a href = "mailto:{{person.email}}">{{ person.email }}</a></div>
-              </div>
+        <div class="main-container container-fluid">
+            <div masonry ng-masonary class="col-md-10 row">
+                <div class="masonry-brick col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+                    <div class="panel panel-default card">
+                        <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+                        <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+                        <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+                        <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+                    </div>
+                </div>
             </div>
-          </masonry>
-          <masonry ng-masonary class="col-md-4 col-sm-4 col-lg-4">
-              <div class = "masonry-brick" ng-repeat="tweet in tweets">
-                  <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="panel panel-default">
-                          <div class="panel-heading" style="background-color: #75b5ff">
-                              <p>
-                                  <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
-                                  as {{tweet.user.screen_name}}</font>
-                              </p>
-                          </div>
-                          <div class="panel-body">
-                              {{tweet.text}}
-                          </div>
-                          <div class="panel-footer">
-                              <div>
-                                  <p class="text-left">
-                                      <font color="24558F">Location:</font> {{tweet.user.location}}
-                                  </p>
-                              </div>
-                              <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-                          </div>
-                      </div>
-
-                  </div>
-              </div>
-          </masonry>
+            <div masonry ng-masonary class="col-md-2 row">
+                <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="background-color: #75b5ff">
+                            <p>
+                                <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
+                                as {{tweet.user.screen_name}}</font>
+                            </p>
+                        </div>
+                        <div class="panel-body">
+                            {{tweet.text}}
+                        </div>
+                        <div class="panel-footer">
+                            <div>
+                                <p class="text-left">
+                                    <font color="24558F">Location:</font> {{tweet.user.location}}
+                                </p>
+                            </div>
+                            <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </div>
 
     <div ng-show="menu == 'edit'">
@@ -264,7 +259,7 @@
                   $scope.initialize = function () {
                       console.log("Initialize");
                       azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
-                      twitterDataService.hashTag = "stemlabs";
+                      twitterDataService.HashTag = "stemlabs";
                       dataService.addSource(azureDataService);
                       dataService.addSource(twitterDataService);
                       dataService.connect(function (results) {
