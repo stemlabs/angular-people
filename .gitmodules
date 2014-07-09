@@ -1,0 +1,3 @@
+[submodule "stem-assets"]
+	path = stem-assets
+	url = git://github.com/stemlabs/stem-assets.git
