@@ -1,0 +1,2 @@
+**Documented Problems**
+for masonry you must have all bootstray layout (not the 'row', just the 'col-md-8') on the masonry tag. otherwise it will not laoyout properly.

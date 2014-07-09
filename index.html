@@ -5,11 +5,17 @@
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
     <!-- <link href="C:\Users\hal9000\Documents\bootstrap\css\bootstrap.css" rel="stylesheet" /> -->
     <style>
-        .main-container {
-            margin-right: 10px;
-            margin-left: 10px;
-            display: block;
-        }
+    .main-container
+    {
+      margin-right: 10px;
+      margin-left: 10px;
+      display: block;
+    }
+
+    masonry div
+    {
+      display: block;
+    }
 
         .glyphicon-edit:hover {
             -webkit-transition: color 1s;
@@ -110,51 +116,46 @@
                 </div>
             </div>
         </nav>
-
-
-        <div class="main-container" style="display: block;">
-            <div class="row">
-                <div class="col-md-10">
-                    <masonry ng-masonary class="main-container">
-                        <div class="masonry-brick" style="width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-                            <div class="panel panel-default card">
-                                <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-                                <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-                                <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-                                <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
-                            </div>
-                        </div>
-                    </masonry>
-                </div>
-                <div class="col-md-2">
-                    <div ng-repeat="tweet in tweets">
-                        <div class="col-sm-12 col-md-12 col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading" style="background-color: #75b5ff">
-                                    <p>
-                                        <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
-                                        as {{tweet.user.screen_name}}</font>
-                                    </p>
-                                </div>
-                                <div class="panel-body">
-                                    {{tweet.text}}
-                                </div>
-                                <div class="panel-footer">
-                                    <div>
-                                        <p class="text-left">
-                                            <font color="24558F">Location:</font> {{tweet.user.location}}
-                                        </p>
-                                    </div>
-                                    <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+        
+        <div class = "main-container row">
+          <masonry ng-masonary class="col-lg-8 col-md-8 col-sm-8">
+            <div class = "masonry-brick" style = "width: 300px;" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+              <div class = "panel panel-default card">
+                <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+                <div ng-hide = "person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+                <div ng-hide = "person.homephone == '' || person.homephone == null" class="panel-body"><a href = "tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+                <div ng-hide = "person.email == '' || person.email == null" class="panel-body"><a href = "mailto:{{person.email}}">{{ person.email }}</a></div>
+              </div>
             </div>
+          </masonry>
+          <masonry ng-masonary class="col-md-4 col-sm-4 col-lg-4">
+              <div class = "masonry-brick" ng-repeat="tweet in tweets">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="panel panel-default">
+                          <div class="panel-heading" style="background-color: #75b5ff">
+                              <p>
+                                  <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
+                                  as {{tweet.user.screen_name}}</font>
+                              </p>
+                          </div>
+                          <div class="panel-body">
+                              {{tweet.text}}
+                          </div>
+                          <div class="panel-footer">
+                              <div>
+                                  <p class="text-left">
+                                      <font color="24558F">Location:</font> {{tweet.user.location}}
+                                  </p>
+                              </div>
+                              <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                          </div>
+                      </div>
 
+                  </div>
+              </div>
+          </masonry>
         </div>
+      </div>
     </div>
 
     <div ng-show="menu == 'edit'">
@@ -192,16 +193,20 @@
     <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+
+    <!-- ACDC data connector -->
     <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
     <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
+
+    <!-- Masonry -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
     <script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
     <script src="angular-masonry.js"></script>
 
     <script>
-        var app = angular.module('app', ['DataModule', 'AzureDataModule', 'TwitterDataModule']);
+        var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule', 'TwitterDataModule']);
         app.controller('controller', ['$scope', 'dataService', 'azureDataService', 'twitterDataService',
               function ($scope, dataService, azureDataService, twitterDataService) {
                   //define global scope variables
@@ -266,7 +271,7 @@
                       dataService.connect(function (results) {
                           console.log('Data Loaded.');
                           $scope.$apply($scope.menu = "main");
-                      }, $scope, 3);
+                      }, $scope, 4);
                   }
 
                   $scope.Edit = function (person) {
