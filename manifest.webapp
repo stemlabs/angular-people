@@ -6,6 +6,14 @@
 	"name": "STEM Labs",
 		"url": "https://stemlabs.github.io/"
 	},
+	"icons": {
+		"32": "/stem-assets/32/logo-filled.png",
+		"60": "/stem-assets/60/logo-filled.png",
+		"90": "/stem-assets/90/logo-filled.png",
+		"120": "/stem-assets/120/logo-filled.png",
+		"128": "/stem-assets/128/logo-filled.png",
+		"256": "/stem-assets/256/logo-filled.png"
+	},
 	"default_locale": "en",
 	"type": "web",
 	"version": "0.1.0"
