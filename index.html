@@ -2,29 +2,64 @@
 <html ng-app="app">
 
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
   <!-- <link href="C:\Users\hal9000\Documents\bootstrap\css\bootstrap.css" rel="stylesheet" /> -->
   <style>
+  .no-padding, .main-container, .main-container masonry, .main-container masonry>div
+  {
+    padding: 0px !important;
+    offset: 0px !important;
+  }
 
-    .no-padding {
-      padding: 0 !important;
-    }
+  .navbar-brand
+  {
+    margin-top: -3px;
+    padding-left: 20px;
+  }
 
-    .glyphicon-edit:hover {
-      -webkit-transition: color 1s;
-      transition: color 1s;
-      cursor: pointer;
-      color: lightblue;
-    }
+  .navbar-right
+  {
+    padding-right: 5px;
+    margin-right: 0px;
+  }
+
+  .navbar
+  {
+    margin-bottom: 10px;
+    offset: 0px;
+  }
+
+  .main-container
+  {
+    margin-left: 10px;
+    margin-right: 10px;
+
+  }
+
+  masonry div:only-child
+  {
+    margin: 10px !important;
+    offset: 0px !important;
+  }
+
+  .glyphicon-edit:hover {
+    -webkit-transition: color 1s;
+    transition: color 1s;
+    cursor: pointer;
+    color: lightblue;
+  }
 
 
-    .glyphicon-edit {
-      -webkit-transition: color 1s;
-      transition: color 1s;
-      color: black;
-      float: right;
-      z-index: 2;
-    }
+  .glyphicon-edit {
+    -webkit-transition: color 1s;
+    transition: color 1s;
+    color: black;
+    float: right;
+    z-index: 2;
+  }
   </style>
   <style>
     @keyframes loadinganimation {
@@ -146,50 +181,52 @@
     <div class="loading six"></div>
   </div>
   <div ng-show="menu == 'main'">
-    <div class="navbar navbar-default row" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Contact Cards<sub>v4.2</sub></a>
-          <button id="button-nav-group" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <div>
-              <div class="btn-group">
-                <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
-                  First Name
-                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
-                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
-                </label>
-                <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
-                  Last Name
-                  <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
-                  <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
-                </label>
-                <label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
-              </div>
-            </div>
-          </ul>
-          <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
-            </div>
-          </form>
-        </div>
-      </div>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Stem Labs<sub>v5</sub></a>
     </div>
-    <div class="main-container no-padding">
-      <div class="col-sm-9 no-padding">
-        <div masonry >
-          <div class="masonry-brick col-xs-12 col-sm-6 col-md-4 no-padding" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <div class="btn-group">
+          <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
+            First Name
+            <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
+            <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
+          </label>
+          <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
+            Last Name
+            <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
+            <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
+          </label>
+          <label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
+        </div>
+      </ul>
+
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="nav-textbox form-control" placeholder="Search">
+        </div>
+        <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+    <div class = "main-container row">
+      <masonry class="col-sm-9">
+          <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
             <div class="panel panel-default card">
               <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
               <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
@@ -197,11 +234,9 @@
               <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-sm-3 no-padding">
-        <div masonry>
-          <div class="masonry-brick col-xs-12 no-padding" ng-repeat="tweet in tweets">
+      </masonry>
+      <masonry class="col-sm-3">
+          <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
             <div class="panel panel-default">
               <div class="panel-heading" style="background-color: #75b5ff">
                 <p>
@@ -221,9 +256,8 @@
                 <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
               </div>
             </div>
-          </div>
         </div>
-      </div>
+      </masonry>
     </div>
   </div>
 
