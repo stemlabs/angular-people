@@ -5,3 +5,5 @@ node_modules/
 *.suo
 /VisualStudio/StemLabsWebApp/StemLabsWebApp.csproj.user
 *.user
+/bin
+/obj/Debug
