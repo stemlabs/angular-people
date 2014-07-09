@@ -225,7 +225,7 @@
 
 
     <div class = "main-container row">
-      <masonry class="col-sm-9">
+      <masonry class="col-md-9 col-sm-12 col-xs-12">
           <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
             <div class="panel panel-default card">
               <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
@@ -235,7 +235,7 @@
             </div>
           </div>
       </masonry>
-      <masonry class="col-sm-3">
+      <masonry class="col-md-3 col-sm-12 col-xs-12">
           <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
             <div class="panel panel-default">
               <div class="panel-heading" style="background-color: #75b5ff">
