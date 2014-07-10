@@ -375,11 +375,10 @@
             $scope.initialize = function () {
               console.log("Initialize");
               azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
-              // twitterDataService.HashTag = "stemlabs";
+              twitterDataService.HashTag = "stemlabs";
               dataService.addSource(azureDataService);
               // dataService.addSource(twitterDataService);
-              dataService.connect(function (results) 
-              {
+              dataService.connect(function (results) {
                 console.log('Data Loaded.');
 
                 $scope.$apply($scope.menu = "main");
