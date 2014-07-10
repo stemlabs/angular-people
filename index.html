@@ -242,7 +242,7 @@
           </div>
       </masonry>
       <masonry class="col-md-3 col-sm-12 col-xs-12">
-          <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
+          <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:'created_at':true">
             <div class="panel panel-default">
               <div class="panel-heading" style="background-color: #75b5ff">
                 <p>
