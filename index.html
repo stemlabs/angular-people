@@ -315,9 +315,9 @@
   <script src="angular-masonry.js"></script>
 
   <script>
-    var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule']);
-    app.controller('controller', ['$scope', '$timeout', 'dataService', 'azureDataService',
-          function ($scope, $timeout, dataService, azureDataService) {
+    var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule', 'TwitterDataModule']);
+    app.controller('controller', ['$scope', '$timeout', 'dataService', 'azureDataService', 'twitterDataService',
+          function ($scope, $timeout, dataService, azureDataService, twitterDataService) {
             //define global scope variables
             $scope.sortField = 'firstname';
             $scope.ascending = true;
