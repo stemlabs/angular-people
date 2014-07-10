@@ -25,6 +25,7 @@
     <TypeScriptCompile Include="TestApp.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
