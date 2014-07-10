@@ -1,5 +1,6 @@
 {
-	"homeURL": "http://stemlabs.github.io/angular-people/",
+    "displayName": "STEM Labs",
+	"homeURL": "http://stemlabs.github.io/angular-people",
 	"navigation": {
 		"hideOnPageBackButton": false,
 		"hideBackButtonOnMatch": [
@@ -16,7 +17,7 @@
 	"logging": {
 		"enabled": true,
 		"level": "log",
-		"disableWithoutDebugger": true,
+		"disableWithoutDebugger": false,
 		"hideTagDisplay": true,
 		"ignoreTags": [
 			"winjs"
@@ -33,51 +34,61 @@
 		}
 	},
 	"share": {
-		"enabled": false,
-		"title": "Share Contact",
+		"enabled": true,
+        "showButton": true,
+        "buttonText": "Share",
+        "buttonSection": "global",
+		"title": "WAT Documentation",
 		"url": "{currentURL}",
 		"screenshot": true,
-		"message": "Check out the Web Application Template for Windows Store apps {url}, and get the app {appUrl}"
+		"message": "{url} shared with {appLink} for Windows Phone and Windows 8 Store apps."
 	},	
 	"offline": {
 		"enabled": true,
 		"message": "It looks like you are offline. Please reconnect to use this application.",
-		"useSuperCache": false,
-		"addIndexedDBSupport": false,
-		"imagesGuardBand": true
-	},
+        "superCache": {
+		    "enabled": true,
+            "baseDomainURL": "http://stemlabs.github.io/angular-people/",
+		    "addIndexedDBSupport": true,
+		    "imagesGuardBand": true,
+            "preCacheURLs": [],
+            "ignoreURLs": []
+        }
+	},    
+    "geoLocation": {
+        "enabled": true
+    },
+    "localXHRInterceptor": {
+        "enabled": false,
+        "useCache": true,
+        "baseDomainURL": "ms-appx-web:///"
+    },
 	"customScript": {
 		"scriptFiles": [
-			"www/injection-script-example.js",
-            "www/injection-script-example2.js"
+			"injection-script-example.js"
 		]
 	},
 	"appBar": {
 		"enabled": true,
 		"makeSticky": false,
 		"buttons": [
-          	{
-            	"label":"Help",
-            	"icon": "help",
-            	"action": "http://wat-docs.azurewebsites.net/Json"
-        	},
 			{
 				"label": "Settings",
-				"icon": "settings",
+				"icon": "edit",
 				"action": "settings"
 			},
-          	{
-            	"label": "Small Text",
-            	"icon": "expand",
-            	"action": "eval",
-              "data": "document.body.setAttribute('style','font-size:100% !important');"
-        	},
-          	{
-            	"label": "Big Text",
-            	"icon": "collapse",
-            	"action": "eval",
-              "data": "document.body.setAttribute('style','font-size:200% !important');"
-        	}
+			{
+				"label": "Get Started",
+				"icon": "previewlink",
+				"action": "http://wat-docs.azurewebsites.net/GetStarted",
+                "section": "selection"
+			},
+			{
+				"label": "Log Message",
+				"icon": "edit",
+				"action": "eval",
+				"data": "console.log('this was fired from within the webview:', window.location.href);"
+			}
 		]
 	},
 	"navBar": {
@@ -86,9 +97,46 @@
 		"makeSticky": false,
 		"buttons": [
 			{
+				"label": "Back",
+				"icon": "back",
+				"action": "back"
+			},
+			{
 				"label": "Home",
 				"icon": "home",
 				"action": "home"
+			},
+			{
+				"label": "STEM Labs",
+				"icon": "library",
+				"action": "nested",
+				"children": [
+					{
+						"label": "For Companies",
+						"icon": "link",
+						"action": "https://github.com/stemlabs/angular-people/wiki"
+					},
+					{
+						"label": "For Students",
+						"icon": "link",
+						"action": "https://github.com/stemlabs/angular-people/wiki"
+					},
+					{
+						"label": "Contact",
+						"icon": "link",
+						"action": "https://github.com/stemlabs/angular-people/wiki"
+					}
+				]
+			},
+			{
+				"label": "About",
+				"icon": "gotostart",
+				"action": "https://github.com/stemlabs/angular-people/wiki"
+			},
+			{
+				"label": "Support",
+				"icon": "people",
+				"action": "https://github.com/stemlabs/angular-people/issues"
 			}
 		]
 	},
@@ -126,7 +174,7 @@
 				"message": "Redirecting you to the Microsoft website..."
 			},
 			{
-				"pattern": "http://msdn.microsoft.com/*",
+				"pattern": "http://github.com/*",
 				"action": "popout"
 			},
 			{
@@ -135,36 +183,25 @@
 				"url": "http://bing.com"
 			},
 			{
-            				"pattern": "http://getbootstrap.com?",
-            				"action": "redirect",
-            				"url": "https://wattest.azure-mobile.net/api/testapi"
-            },
-			{
 				"pattern": "*/drive_api/calculator/login",
 				"action": "modal",
 				"hideCloseButton": true,
 				"closeOnMatch": "*/drive_api/calculator/complete_login"
-			},
-			{
-                "pattern": "*/login/twitter",
-                "action": "modal",
-                "hideCloseButton": true,
-                "closeOnMatch": "*/login/done*"
-            }
+			}
 		]
 	},
 	"settings": {
 		"enabled": true,
-		"privacyUrl": "http://wat-docs.azurewebsites.net/Privacy",
+		"privacyUrl": "http://github.com/stemlabs",
 		"items": [
 			{
 				"title": "Support",
-				"page": "http://wat-docs.azurewebsites.net/Support",
+				"page": "https://github.com/stemlabs/angular-people/issues",
 				"loadInApp": true
 			},
 			{
-				"title": "Codeplex Site",
-				"page": "http://www.codeplex.com"
+				"title": "STEM Labs on Github",
+				"page": "http://github.com/stemlabs"
 			}
 		]
 	},
@@ -175,18 +212,18 @@
 		"suppressTouchAction": false,
 		"extendedSplashScreenBackground": "#464646",
 		"hiddenElements":[
-
+			"header", ".bs-header"
 		],
 		"backButton": {
 			"borderColor": "#FFFFFF",
 			"color": "#FFFFFF"
 		},
-		"wrapperCssFile": "www/css/wrapper-styles.css",
-		"customCssFile": "www/css/injected-styles.css",
-		"customCssString": "body (color: red !important)"
+		"wrapperCssFile": "/css/wrapper-styles.css",
+		"customCssFile": "/css/injected-styles.css",
+		"customCssString": "body {padding:0;font-size: 14pt;} .container{margin-left:120px; margin-right:0px;} .bs-header{height: 140px;padding-left:0px;} .bs-header h1{margin:0;margin-top:10px;} .bs-header h1{margin-right:0;} .bs-header p{display:none;}"
 	},
 	"header": {
-			"enabled": true,
+			"enabled": false,
 			"backgroundColor": "#7fba00",
 			"logo": "/images/widelogo.scale-100.png",
 			"title": {
@@ -195,7 +232,7 @@
 			}
 	},
 	"search": {
-		"enabled": true,
+		"enabled": false,
 		"searchURL": "http://wat-docs.azurewebsites.net/search/?query={searchTerm}",
 		"useOnScreenSearchBox": true,
 		"onScreenSearchOptions": {
@@ -208,9 +245,10 @@
 	"secondaryPin": {
         "enabled": true,
 		"buttonText": "Pin It!",
+        "tileTextTheme": "light", 
+        "buttonSection": "global",
 		"squareImage": "/images/logo.scale-100.png",
 		"wideImage": "/images/widelogo.scale-100.png"
 	},
 	"styleTheme": "dark"
 }
-        
