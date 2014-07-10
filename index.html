@@ -2,177 +2,187 @@
 <html ng-app="app">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
-    <link href="flat-ui.css" rel="stylesheet" />
-    <style>
-        .no-padding, .main-container, .main-container masonry, .main-container masonry > div {
-            padding: 0px !important;
-            offset: 0px !important;
-        }
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
+  <!-- <link href="C:\Users\hal9000\Documents\bootstrap\css\bootstrap.css" rel="stylesheet" /> -->
+  <style>
+  .userimage
+  {
+    width: 100px;
 
-        .btn {
-    margin-top: 4px;
-}
+  }
 
-        .card div {
-            padding: 4px;
-            /*margin: 2.5px;*/
-        }
+  .no-padding, .main-container, .main-container masonry, .main-container masonry>div
+  {
+    padding: 0px !important;
+    offset: 0px !important;
+  }
 
-        .navbar-brand {
-           /*margin-top: -3px;*/ 
-            padding-left: 20px;
-        }
+  .card div
+  {
+    padding: 4px;
+    /*margin: 2.5px;*/
+    margin: auto;
+  }
 
-        .navbar-right {
-            padding-right: 5px;
-            margin-right: 0px;
-        }
+  .navbar-brand
+  {
+    margin-top: -3px;
+    padding-left: 20px;
+  }
 
-        .navbar {
-          /*margin-bottom: 10px;*/  
-            offset: 0px;
-        }
+  .navbar-right
+  {
+    padding-right: 5px;
+    margin-right: 0px;
+  }
 
-        .main-container {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
+  .navbar
+  {
+    margin-bottom: 10px;
+    offset: 0px;
+  }
 
-        masonry div:only-child {
-            margin: 10px !important;
-            offset: 0px !important;
-        }
+  .main-container
+  {
+    margin-left: 10px;
+    margin-right: 10px;
 
-        .glyphicon-edit:hover {
-            -webkit-transition: color 1s;
-            transition: color 1s;
-            cursor: pointer;
-            color: lightblue;
-        }
+  }
+
+  masonry div:only-child
+  {
+    margin: 10px !important;
+    offset: 0px !important;
+  }
+
+  .glyphicon-edit:hover {
+    -webkit-transition: color 1s;
+    transition: color 1s;
+    cursor: pointer;
+    color: lightblue;
+  }
 
 
-        .glyphicon-edit {
-            -webkit-transition: color 1s;
-            transition: color 1s;
-            color: black;
-            float: right;
-            z-index: 2;
-        }
-    </style>
-    <style>
-        @keyframes loadinganimation {
-            0% {
-                background-color: lightblue;
-            }
+  .glyphicon-edit {
+    -webkit-transition: color 1s;
+    transition: color 1s;
+    color: black;
+    float: right;
+    z-index: 2;
+  }
+  </style>
+  <style>
+    @keyframes loadinganimation {
+      0% {
+        background-color: lightblue;
+      }
 
-            30% {
-                background-color: lightblue;
-            }
+      30% {
+        background-color: lightblue;
+      }
 
-            50% {
-                background-color: blue;
-            }
+      50% {
+        background-color: blue;
+      }
 
-            70% {
-                background-color: lightblue;
-            }
+      70% {
+        background-color: lightblue;
+      }
 
-            100% {
-                background-color: lightblue;
-            }
-        }
+      100% {
+        background-color: lightblue;
+      }
+    }
 
-        @-webkit-keyframes loadinganimation /* Safari and Chrome */
-        {
-            0% {
-                background-color: lightblue;
-            }
+    @-webkit-keyframes loadinganimation /* Safari and Chrome */
+    {
+      0% {
+        background-color: lightblue;
+      }
 
-            30% {
-                background-color: lightblue;
-            }
+      30% {
+        background-color: lightblue;
+      }
 
-            50% {
-                background-color: blue;
-            }
+      50% {
+        background-color: blue;
+      }
 
-            70% {
-                background-color: lightblue;
-            }
+      70% {
+        background-color: lightblue;
+      }
 
-            100% {
-                background-color: lightblue;
-            }
-        }
+      100% {
+        background-color: lightblue;
+      }
+    }
 
-        #loadingcontainer {
-            display: inline-block;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-        }
+    #loadingcontainer {
+      display: inline-block;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+    }
 
-        .loading {
-            z-index: 3;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            height: 20px;
-            width: 20px;
-        }
+    .loading {
+      z-index: 3;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      height: 20px;
+      width: 20px;
+    }
 
-            .loading.one {
-                left: 37.5%;
-                animation: loadinganimation 1s infinite;
-                -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-            }
+      .loading.one {
+        left: 37.5%;
+        animation: loadinganimation 1s infinite;
+        -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
+      }
 
-            .loading.two {
-                left: 42.5%;
-                animation: loadinganimation 1s infinite;
-                -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-                -webkit-animation-delay: .16s; /* Safari and Chrome */
-                animation-delay: .16s;
-            }
+      .loading.two {
+        left: 42.5%;
+        animation: loadinganimation 1s infinite;
+        -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
+        -webkit-animation-delay: .16s; /* Safari and Chrome */
+        animation-delay: .16s;
+      }
 
-            .loading.three {
-                left: 47.5%;
-                animation: loadinganimation 1s infinite;
-                -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-                -webkit-animation-delay: .33s; /* Safari and Chrome */
-                animation-delay: .33s;
-            }
+      .loading.three {
+        left: 47.5%;
+        animation: loadinganimation 1s infinite;
+        -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
+        -webkit-animation-delay: .33s; /* Safari and Chrome */
+        animation-delay: .33s;
+      }
 
-            .loading.four {
-                left: 52.5%;
-                animation: loadinganimation 1s infinite;
-                -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-                -webkit-animation-delay: .5s; /* Safari and Chrome */
-                animation-delay: .5s;
-            }
+      .loading.four {
+        left: 52.5%;
+        animation: loadinganimation 1s infinite;
+        -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
+        -webkit-animation-delay: .5s; /* Safari and Chrome */
+        animation-delay: .5s;
+      }
 
-            .loading.five {
-                left: 57.5%;
-                animation: loadinganimation 1s infinite;
-                -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-                -webkit-animation-delay: .66s; /* Safari and Chrome */
-                animation-delay: .66s;
-            }
+      .loading.five {
+        left: 57.5%;
+        animation: loadinganimation 1s infinite;
+        -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
+        -webkit-animation-delay: .66s; /* Safari and Chrome */
+        animation-delay: .66s;
+      }
 
-            .loading.six {
-                left: 62.5%;
-                animation: loadinganimation 1s infinite;
-                -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-                -webkit-animation-delay: .86s; /* Safari and Chrome */
-                animation-delay: .86s;
-            }
-    </style>
+      .loading.six {
+        left: 62.5%;
+        animation: loadinganimation 1s infinite;
+        -webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
+        -webkit-animation-delay: .86s; /* Safari and Chrome */
+        animation-delay: .86s;
+      }
+  </style>
 </head>
-
 <body ng-controller="controller">
     <div id="loadingcontainer" ng-show="menu == 'loading'">
         <div class="loading one"></div>
@@ -224,93 +234,101 @@
                 </div>
             </div>
         </nav>
-
-
-        <div class="main-container row">
-            <masonry class="col-md-9 col-sm-12 col-xs-12">
-                <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-                    <div class="panel panel-default card">
-                        <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-                        <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-                        <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-                        <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
-                    </div>
-                </div>
-            </masonry>
-            <masonry class="col-md-3 col-sm-12 col-xs-12">
-                <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:'created_at':true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color:#002F8F ">
-                            <p>
-                                <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
-                                as {{tweet.user.screen_name}} at {{tweet.created_at}}</font>
-                            </p>
-                        </div>
-                        <div class="panel-body">
-                            {{tweet.text}}
-                        </div>
-                        <div class="panel-footer">
-                            <div>
-                                <p class="text-left">
-                                    <font color="24558F">Location:</font> {{tweet.user.location}}
-                                </p>
-                            </div>
-                            <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-                        </div>
-                    </div>
-                </div>
-            </masonry>
-        </div>
+      </form>
     </div>
+  </div>
+</nav>
 
-    <div ng-show="menu == 'edit'">
-        <div class="well form-horizontal edit">
-            <legend>Edit Person</legend>
-            <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
-            <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
-            <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
-            <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
-            <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
-            <div style="margin-top: 5px;">
-                <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
-                <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
-                <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
+    <div class = "main-container row">
+      <masonry class="col-md-9 col-sm-12 col-xs-12">
+          <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+            <div class="panel panel-default card">
+              <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+              <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+              <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+              <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+              <div>
+                <img alt = "Person's Picture" class = "userimage img-rounded" src = "{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body"/>
+              </div>
+            </div>
+          </div>
+      </masonry>
+      <masonry class="col-md-3 col-sm-12 col-xs-12">
+          <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
+            <div class="panel panel-default">
+              <div class="panel-heading" style="background-color: #75b5ff">
+                <p>
+                  <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
+                  as {{tweet.user.screen_name}}</font>
+                </p>
+              </div>
+              <div class="panel-body">
+                {{tweet.text}}
+              </div>
+              <div class="panel-footer">
+                <div>
+                  <p class="text-left">
+                    <font color="24558F">Location:</font> {{tweet.user.location}}
+                  </p>
+                </div>
+                <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+              </div>
             </div>
         </div>
+      </masonry>
     </div>
+  </div>
 
-    <div ng-show="menu == 'add'">
-        <div class="well form-horizontal add">
-            <legend>Add Person</legend>
-            <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
-            <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
-            <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
-            <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
-            <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
-            <div style="margin-top: 5px;">
-                <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
-                <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
-            </div>
-        </div>
+  <div ng-show="menu == 'edit'">
+    <div class="well form-horizontal edit">
+      <legend>Edit Person</legend>
+      <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+      <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+      <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+      <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+      <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+      <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
+      <div style="margin-top: 5px;">
+        <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
+        <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
+        <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Core Functionality -->
-    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+  <div ng-show="menu == 'add'">
+    <div class="well form-horizontal add">
+      <legend>Add Person</legend>
+      <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+      <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+      <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+      <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+      <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+      <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
+      <div style="margin-top: 5px;">
+        <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
+        <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
+      </div>
+    </div>
+  </div>
 
-    <!-- ACDC data connector -->
-    <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
+  <!-- Core Functionality -->
+  <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
 
-    <!-- Masonry -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
-    <script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
-    <script src="angular-masonry.js"></script>
+  <!-- ACDC data connector -->
+  <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
 
-    <script>
+  <!-- Masonry -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+  <script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
+  <script src="angular-masonry.js"></script>
+
+  <script>
         var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule', 'TwitterDataModule']);
         app.controller('controller', ['$scope', '$timeout', 'dataService', 'azureDataService', 'twitterDataService',
               function ($scope, $timeout, dataService, azureDataService, twitterDataService) {
@@ -408,8 +426,6 @@
                   $scope.watchbuttons();
               }
         ]);
-
     </script>
 </body>
-
 </html>
