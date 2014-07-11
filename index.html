@@ -254,11 +254,11 @@
                 </div>
             </masonry>
             <masonry class="col-md-3 col-sm-12 col-xs-12">
-            <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
+            <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
                     <div class="panel panel-default">
-                <div class="panel-heading" style="background-color: #75b5ff">
+                <div class="panel-heading" style="background-color:#75b5ff">
                             <p>
-                                <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
+                                <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" >By {{tweet.user.name}}</a>
                     as {{tweet.user.screen_name}}</font>
                             </p>
                         </div>
@@ -422,6 +422,11 @@
 
                       })
                   }
+
+                  $scope.twitterSort = function (tweet) {
+                      return tweet.created_at.substring(3);
+                  }
+
                   $scope.initialize();
                   $scope.watchbuttons();
               }
