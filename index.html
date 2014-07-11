@@ -8,6 +8,11 @@
   <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
   <!-- <link href="C:\Users\hal9000\Documents\bootstrap\css\bootstrap.css" rel="stylesheet" /> -->
   <style>
+  .edit input, .add input
+  {
+    margin-top: 5px;
+  }
+
   .userimage
   {
     width: 100px;
@@ -193,91 +198,85 @@
         <div class="loading six"></div>
     </div>
     <div ng-show="menu == 'main'">
-
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Stem Labs<sub>v5</sub></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <div class="btn-group">
-                            <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
-                                First Name
-                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
-                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
-                            </label>
-                            <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
-                                Last Name
-                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
-                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
-                            </label>
-                            <label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
-                        </div>
-                    </ul>
-
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <input ng-model="searchText" type="text" class="nav-textbox form-control" placeholder="Search">
-                        </div>
-                        <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-                    </form>
-                </div>
-            </div>
-        </nav>
-      </form>
-    </div>
-  </div>
-</nav>
-
-    <div class = "main-container row">
-      <masonry class="col-md-9 col-sm-12 col-xs-12">
-          <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-            <div class="panel panel-default card">
-              <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-              <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-              <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-              <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
-              <div>
-                <img alt = "Person's Picture" class = "userimage img-rounded" src = "{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body"/>
+      <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Stem Labs<sub>v5</sub></a>
               </div>
-            </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <div class="btn-group">
+                          <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
+                              First Name
+                              <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
+                              <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
+                          </label>
+                          <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
+                              Last Name
+                              <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
+                              <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
+                          </label>
+                          <label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
+                      </div>
+                  </ul>
+
+                  <form class="navbar-form navbar-right" role="search">
+                      <div class="form-group">
+                          <input ng-model="searchText" type="text" class="nav-textbox form-control" placeholder="Search">
+                      </div>
+                      <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+                  </form>
+              </div>
           </div>
-      </masonry>
-      <masonry class="col-md-3 col-sm-12 col-xs-12">
-          <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
-            <div class="panel panel-default">
-              <div class="panel-heading" style="background-color: #75b5ff">
-                <p>
-                  <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
-                  as {{tweet.user.screen_name}}</font>
-                </p>
-              </div>
-              <div class="panel-body">
-                {{tweet.text}}
-              </div>
-              <div class="panel-footer">
+      </nav>
+      <div class = "main-container row">
+        <masonry class="col-md-9 col-sm-12 col-xs-12">
+            <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+              <div class="panel panel-default card">
+                <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+                <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
+                <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+                <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
                 <div>
-                  <p class="text-left">
-                    <font color="24558F">Location:</font> {{tweet.user.location}}
+                  <img alt = "Person's Picture" class = "userimage img-rounded" src = "{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body"/>
+                </div>
+              </div>
+            </div>
+        </masonry>
+        <masonry class="col-md-3 col-sm-12 col-xs-12">
+            <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
+              <div class="panel panel-default">
+                <div class="panel-heading" style="background-color: #75b5ff">
+                  <p>
+                    <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
+                    as {{tweet.user.screen_name}}</font>
                   </p>
                 </div>
-                <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                <div class="panel-body">
+                  {{tweet.text}}
+                </div>
+                <div class="panel-footer">
+                  <div>
+                    <p class="text-left">
+                      <font color="24558F">Location:</font> {{tweet.user.location}}
+                    </p>
+                  </div>
+                  <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                </div>
               </div>
-            </div>
-        </div>
-      </masonry>
+          </div>
+        </masonry>
+      </div>
     </div>
-  </div>
 
   <div ng-show="menu == 'edit'">
     <div class="well form-horizontal edit">
