@@ -234,11 +234,11 @@
                     <div class="panel panel-default card">
                         <div class="panel-heading"> {{ person.firstname }} {{ person.lastname }} <i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
                         <div>
-                            <img alt="Person's Picture" align="right top" class="userimage img-rounded" src="{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" />
+                            <img alt="Person's Picture" align="right" class="userimage img-rounded" src="{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" />
                         </div>
-                        <div ng-hide="person.homephone == '' || person.homephone == null" align="left" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-                        <div ng-hide="person.email == '' || person.email == null" align="left" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
-                        <div ng-hide="person.address1 == 'h' || person.address1 == null" align="left" class="panel-body">{{ person.address1 }}</div>
+                        <div ng-hide="person.homephone == '' || person.homephone == null" class="alignleft panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
+                        <div ng-hide="person.email == '' || person.email == null" class="alignleft panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+                        <div ng-hide="person.address1 == 'h' || person.address1 == null" class="alignleft panel-body">{{ person.address1 }}</div>
                     </div>
                 </div>
             </masonry>
