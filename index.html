@@ -9,41 +9,57 @@
 
     <link href="flat-ui.css" rel="stylesheet" />
     <style>
-        .no-padding, .main-container, .main-container masonry, .main-container masonry > div {
-            padding: 0px !important;
-            offset: 0px !important;
+  .edit input, .add input
+  {
+    margin-top: 5px;
         }
 
-        .btn {
-    margin-top: 4px;
+  .userimage
+  {
+    width: 100px;
+
 }
 
-        .card div {
+  .no-padding, .main-container, .main-container masonry, .main-container masonry>div
+  {
+    padding: 0px !important;
+    offset: 0px !important;
+  }
+
+  .card div
+  {
             padding: 4px;
             /*margin: 2.5px;*/
+    margin: auto;
         }
 
-        .navbar-brand {
-           /*margin-top: -3px;*/ 
+  .navbar-brand
+  {
+    margin-top: -3px;
             padding-left: 20px;
         }
 
-        .navbar-right {
+  .navbar-right
+  {
             padding-right: 5px;
             margin-right: 0px;
         }
 
-        .navbar {
-          /*margin-bottom: 10px;*/  
+  .navbar
+  {
+    margin-bottom: 10px;
             offset: 0px;
         }
 
-        .main-container {
+  .main-container
+  {
             margin-left: 10px;
             margin-right: 10px;
+
         }
 
-        masonry div:only-child {
+  masonry div:only-child
+  {
             margin: 10px !important;
             offset: 0px !important;
         }
@@ -173,7 +189,6 @@
             }
     </style>
 </head>
-
 <body ng-controller="controller">
     <div id="loadingcontainer" ng-show="menu == 'loading'">
         <div class="loading one"></div>
@@ -184,7 +199,6 @@
         <div class="loading six"></div>
     </div>
     <div ng-show="menu == 'main'">
-
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -225,9 +239,7 @@
                 </div>
             </div>
         </nav>
-
-
-        <div class="main-container row">
+      <div class = "main-container row">
             <masonry class="col-md-9 col-sm-12 col-xs-12">
                 <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
                     <div class="panel panel-default card">
@@ -235,16 +247,19 @@
                         <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
                         <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
                         <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+                <div>
+                  <img alt = "Person's Picture" class = "userimage img-rounded" src = "{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body"/>
+                </div>
                     </div>
                 </div>
             </masonry>
             <masonry class="col-md-3 col-sm-12 col-xs-12">
-                <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:'created_at':true">
+            <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets">
                     <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color:#3272C6 ">
+                <div class="panel-heading" style="background-color: #75b5ff">
                             <p>
                                 <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF" size="4" font_family="Helvetica">By {{tweet.user.name}}</a>
-                                as {{tweet.user.screen_name}} at {{tweet.created_at}}</font>
+                    as {{tweet.user.screen_name}}</font>
                             </p>
                         </div>
                         <div class="panel-body">
@@ -272,6 +287,7 @@
             <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
             <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
             <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+      <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
             <div style="margin-top: 5px;">
                 <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
                 <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
@@ -288,6 +304,7 @@
             <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
             <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
             <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+      <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
             <div style="margin-top: 5px;">
                 <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
                 <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
@@ -409,8 +426,6 @@
                   $scope.watchbuttons();
               }
         ]);
-
     </script>
 </body>
-
 </html>
