@@ -241,14 +241,18 @@
 				<div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
 					<div class="panel panel-default card">
 						<div class="panel-heading"> {{ person.firstname }} {{ person.lastname }} <i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-						<table>
-						  <div ng-hide="person.homephone == '' || person.homephone == null" align="left" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-						  <div ng-hide="person.email == '' || person.email == null" align="left" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
-						  <div ng-hide="person.address1 == 'h' || person.address1 == null" align="left" class="panel-body">{{ person.address1 }}</div>
-						  <div>
-							  <img alt="Person's Picture" class="userimage img-rounded alignright" src="{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" />
-						  </div>
-						</table>
+                        <table border="1">
+                            <tr>
+                                <td><div ng-hide="person.homephone == '' || person.homephone == null" align="left" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div></td>
+                                <td><div><img alt="Person's Picture" class="userimage img-rounded alignright" src="{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" /></div></td>
+                            </tr>
+                            <tr>
+                                <td><div ng-hide="person.email == '' || person.email == null" align="left" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div></td>
+                            </tr>
+                            <tr>
+                                <td><div ng-hide="person.address1 == 'h' || person.address1 == null" align="left" class="panel-body">{{ person.address1 }}</div></td>
+                            </tr>
+                        </table>
 					</div>
 				</div>
 			</masonry>
