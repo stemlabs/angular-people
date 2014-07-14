@@ -5379,46 +5379,46 @@ masonry div:only-child {
 
 @keyframes loadinganimation {
     0% {
-        background-color: lightblue;
+        background-color: lightgreen;
     }
 
     30% {
-        background-color: lightblue;
+        background-color: lightgreen;
     }
 
     50% {
-        background-color: blue;
+        background-color: green;
     }
 
     70% {
-        background-color: lightblue;
+        background-color: lightgreen;
     }
 
     100% {
-        background-color: lightblue;
+        background-color: lightgreen;
     }
 }
 
 @-webkit-keyframes loadinganimation /* Safari and Chrome */
 {
     0% {
-        background-color: lightblue;
+        background-color: lightgreen;
     }
 
     30% {
-        background-color: lightblue;
+        background-color: lightgreen;
     }
 
     50% {
-        background-color: blue;
+        background-color: green;
     }
 
     70% {
-        background-color: lightblue;
+        background-color: lightgreen;
     }
 
     100% {
-        background-color: lightblue;
+        background-color: lightgreen;
     }
 }
 
