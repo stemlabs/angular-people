@@ -2,260 +2,264 @@
 <html ng-app="app">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
-    <link href="flat-ui.css" rel="stylesheet" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
+	<link href="flat-ui.css" rel="stylesheet" />
 
 </head>
 <body ng-controller="controller">
-    <div id="loadingcontainer" ng-show="menu == 'loading'">
-        <div class="loading one"></div>
-        <div class="loading two"></div>
-        <div class="loading three"></div>
-        <div class="loading four"></div>
-        <div class="loading five"></div>
-        <div class="loading six"></div>
-    </div>
-    <div ng-show="menu == 'main'">
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Stem Labs<sub>v5</sub></a>
-                </div>
+	<div id="loadingcontainer" ng-show="menu == 'loading'">
+		<div class="loading one"></div>
+		<div class="loading two"></div>
+		<div class="loading three"></div>
+		<div class="loading four"></div>
+		<div class="loading five"></div>
+		<div class="loading six"></div>
+	</div>
+	<div ng-show="menu == 'main'">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="https://stemlabs.github.io/">Stem Labs<sub>V5</sub></a>
+				</div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <div class="btn-group">
-                            <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
-                                First Name
-                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
-                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
-                            </label>
-                            <label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
-                                Last Name
-                                <i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
-                                <i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
-                            </label>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<div class="btn-group">
+							<label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'firstname';" btn-radio="'firstname'">
+								First Name
+								<i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='firstname' && ascending"></i>
+								<i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='firstname' && !ascending"></i>
+							</label>
+							<label class="btn btn-lg" ng-click="ascending=!ascending; sortField = 'lastname';" btn-radio="'lastname'">
+								Last Name
+								<i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
+								<i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
+							</label>
 
-                        </div>
-                    </ul>
+						</div>
+					</ul>
 
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <input ng-model="searchText" type="text" class="nav-textbox form-control" placeholder="Search">
-                        </div>
-                        <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-                    </form>
-                    <label class="btn btn-lg navbar-right" ng-click="menu = 'add'">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        Add
-                       
-                    </label>
-                </div>
-            </div>
-        </nav>
-        <div class="main-container row">
-            <masonry class="col-md-9 col-sm-12 col-xs-12">
-                <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-                    <div class="panel panel-default card">
-                        <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}<i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-                        <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</div>
-                        <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></div>
-                        <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
-                        <div>
-                            <img alt="Person's Picture" class="userimage img-rounded" src="{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" />
-                        </div>
-                    </div>
-                </div>
-            </masonry>
-            <masonry class="col-md-3 col-sm-12 col-xs-12">
-                <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color:#75b5ff">
-                            <p>
-                                <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
-                                as {{tweet.user.screen_name}}</font>
-                            </p>
-                        </div>
-                        <div class="panel-body">
-                            {{tweet.text}}
-                        </div>
-                        <div class="panel-footer">
-                            <div>
-                                <p class="text-left">
-                                    <font color="24558F">Location:</font> {{tweet.user.location}}
-                                </p>
-                            </div>
-                            <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-                        </div>
-                    </div>
-                </div>
-            </masonry>
-        </div>
-    </div>
+					<form class="navbar-form navbar-right" role="search">
+						<div class="form-group">
+							<input ng-model="searchText" type="text" class="nav-textbox form-control" placeholder="Search">
+						</div>
+						<!-- <button type="submit" class="btn btn-default">Submit</button> -->
+					</form>
+					<label class="btn btn-lg navbar-right" ng-click="menu = 'add'">
+						<i class="glyphicon glyphicon-plus"></i>
+						Add
+					   
+					</label>
+				</div>
+			</div>
+		</nav>
+		<div class="main-container row">
+			<masonry class="col-md-9 col-sm-12 col-xs-12">
+				<div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+					<div class="panel panel-default card">
+						<div class="panel-heading"> {{ person.firstname }} {{ person.lastname }} <i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+						<table>
+							<tr>
+								<td>
+									<div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></br></div>
+									<div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}    </br></div>
+						<div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+								</td>
+								<td><div><img alt="Person's Picture" class="userimage img-rounded" src="{{ person.imageurl }}" ng-href="person.imageurl" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" /></div></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</masonry>
+			<masonry class="col-md-3 col-sm-12 col-xs-12">
+			<div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
+					<div class="panel panel-default">
+						<div class="panel-heading" style="background-color:#51a051">
+							<p>
+								<a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
+					as {{tweet.user.screen_name}}</font>
+							</p>
+						</div>
+						<div class="panel-body">
+							{{tweet.text}}
+						</div>
+						<div class="panel-footer">
+							<div>
+								<p class="text-left">
+									<font color="24558F">Location:</font> {{tweet.user.location}}
+								</p>
+							</div>
+							<font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+						</div>
+					</div>
+				</div>
+			</masonry>
+		</div>
+	</div>
 
-    <div ng-show="menu == 'edit'">
-        <div class="well form-horizontal edit">
-            <legend>Edit Person</legend>
-            <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
-            <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
-            <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
-            <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
-            <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
-            <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
-            <div style="margin-top: 5px;">
-                <button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
-                <button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
-                <button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
-            </div>
-        </div>
-    </div>
+	<div ng-show="menu == 'edit'">
+		<div class="well form-horizontal edit">
+			<legend>Edit Person</legend>
+			<input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+			<input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+			<input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+			<input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+			<input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+	  <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
+			<div style="margin-top: 5px;">
+				<button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
+				<button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
+				<button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
+			</div>
+		</div>
+	</div>
 
-    <div ng-show="menu == 'add'">
-        <div class="well form-horizontal add">
-            <legend>Add Person</legend>
-            <input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
-            <input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
-            <input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
-            <input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
-            <input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
-            <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
-            <div style="margin-top: 5px;">
-                <button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
-                <button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
-            </div>
-        </div>
-    </div>
+	<div ng-show="menu == 'add'">
+		<div class="well form-horizontal add">
+			<legend>Add Person</legend>
+			<input type="text" ng-model='currentEdit.firstname' class="form-control" placeholder="First Name" />
+			<input type="text" ng-model='currentEdit.lastname' class="form-control" placeholder="Last Name" />
+			<input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
+			<input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
+			<input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
+	  <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
+			<div style="margin-top: 5px;">
+				<button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
+				<button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
+			</div>
+		</div>
+	</div>
 
-    <!-- Core Functionality -->
-    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+	<!-- Core Functionality -->
+	<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
 
-    <!-- ACDC data connector -->
-    <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
-    <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
+	<!-- ACDC data connector -->
+	<script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
+	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
+	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
+	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
 
-    <!-- Masonry -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
-    <script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
-    <script src="angular-masonry.js"></script>
+	<!-- Masonry -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+	<script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
+	<script src="angular-masonry.js"></script>
 
-    <script>
-        var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule', 'TwitterDataModule']);
-        app.controller('controller', ['$scope', '$timeout', 'dataService', 'azureDataService', 'twitterDataService',
-              function ($scope, $timeout, dataService, azureDataService, twitterDataService) {
-                  //define global scope variables
-                  $scope.sortField = 'firstname';
-                  $scope.ascending = true;
-                  $scope.currentColumn = 0;
-                  $scope.menu = "loading";
-                  var timeout = null;
+	<script>
+		var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule', 'TwitterDataModule']);
+		app.controller('controller', ['$scope', '$timeout', 'dataService', 'azureDataService', 'twitterDataService',
+			  function ($scope, $timeout, dataService, azureDataService, twitterDataService) {
+				  //define global scope variables
+				  $scope.sortField = 'firstname';
+				  $scope.ascending = true;
+				  $scope.currentColumn = 0;
+				  $scope.menu = "loading";
+				  var timeout = null;
 
-                  $scope.Delete = function (tableName, entity) {
-                      dataService.remove(tableName, entity, function () {
-                          //updates the data after you add data
-                          $scope.sync();
-                      }, function () {
-                          console.log('Problem removing the data.');
-                      });
+				  $scope.Delete = function (tableName, entity) {
+					  dataService.remove(tableName, entity, function () {
+						  //updates the data after you add data
+						  $scope.sync();
+					  }, function () {
+						  console.log('Problem removing the data.');
+					  });
 
-                      $scope.menu = "main";
-                      $scope.currentEdit = {};
-                  };
+					  $scope.menu = "main";
+					  $scope.currentEdit = {};
+				  };
 
-                  //function to add a new data entry
-                  $scope.Add = function (tableName, entity) {
-                      dataService.add(tableName, entity, function () {
-                          //updates the data after you add data
-                          $scope.sync();
-                      }, function () {
-                          console.log('Problem adding data.');
-                      });
+				  //function to add a new data entry
+				  $scope.Add = function (tableName, entity) {
+					  dataService.add(tableName, entity, function () {
+						  //updates the data after you add data
+						  $scope.sync();
+					  }, function () {
+						  console.log('Problem adding data.');
+					  });
 
-                      $scope.menu = "main";
-                      $scope.currentEdit = {};
-                  };
+					  $scope.menu = "main";
+					  $scope.currentEdit = {};
+				  };
 
-                  $scope.Change = function (tableName, entity) {
-                      dataService.update(tableName, entity, function () {
-                          $scope.sync();
-                      }, function () {
-                          console.log('Problem updating data.');
-                      });
-                      $scope.menu = "main";
-                      $scope.currentEdit = {};
+				  $scope.Change = function (tableName, entity) {
+					  dataService.update(tableName, entity, function () {
+						  $scope.sync();
+					  }, function () {
+						  console.log('Problem updating data.');
+					  });
+					  $scope.menu = "main";
+					  $scope.currentEdit = {};
 
-                  };
+				  };
 
-                  //function to sync the data
-                  $scope.sync = function () {
-                      // alert("sync");
-                      dataService.getEntries(function (results) {
-                          for (var result in results) {
-                              $scope.$apply($scope[result] = results[result]);
-                          }
-                      });
-                  }
+				  //function to sync the data
+				  $scope.sync = function () {
+					  // alert("sync");
+					  dataService.getEntries(function (results) {
+						  for (var result in results) {
+							  $scope.$apply($scope[result] = results[result]);
+						  }
+					  });
+				  }
 
-                  //function to intialize the connection
-                  $scope.initialize = function () {
-                      console.log("Initialize");
-                      azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
-                      twitterDataService.HashTag = "stemlabs";
-                      dataService.addSource(azureDataService);
-                      dataService.addSource(twitterDataService);
-                      dataService.connect(function (results) {
-                          console.log('Data Loaded.');
+				  //function to intialize the connection
+				  $scope.initialize = function () {
+					  console.log("Initialize");
+					  azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
+					  twitterDataService.HashTag = "stemlabs";
+					  dataService.addSource(azureDataService);
+					  dataService.addSource(twitterDataService);
+					  dataService.connect(function (results) {
+						  console.log('Data Loaded.');
 
-                          $scope.$apply($scope.menu = "main");
+						  $scope.$apply($scope.menu = "main");
 
-                      }, $scope, 4);
-                  }
+					  }, $scope, 4);
+				  }
 
-                  $scope.Edit = function (person) {
-                      $scope.menu = "edit";
-                      $scope.currentEdit = person;
-                  }
+				  $scope.Edit = function (person) {
+					  $scope.menu = "edit";
+					  $scope.currentEdit = person;
+				  }
 
 
-                  $scope.watchbuttons = function () {
-                      $scope.$watch('sortField', function () {
-                          $scope.ascending = true;
-                      });
+				  $scope.watchbuttons = function () {
+					  $scope.$watch('sortField', function () {
+						  $scope.ascending = true;
+					  });
 
-                      $scope.$watch(function () {
-                          return $scope.sortField + $scope.ascending;
-                      }, function () {
-                          if ($scope.ascending) {
-                              $scope.directionalSort = '+' + $scope.sortField;
-                          } else {
-                              $scope.directionalSort = '-' + $scope.sortField;
-                          }
+					  $scope.$watch(function () {
+						  return $scope.sortField + $scope.ascending;
+					  }, function () {
+						  if ($scope.ascending) {
+							  $scope.directionalSort = '+' + $scope.sortField;
+						  } else {
+							  $scope.directionalSort = '-' + $scope.sortField;
+						  }
 
-                      })
-                  }
+					  })
+				  }
 
-                  $scope.twitterSort = function (tweet) {
-                      return tweet.created_at.substring(3);
-                  }
+				  $scope.twitterSort = function (tweet) {
+					  return tweet.created_at.substring(3);
+				  }
 
-                  $scope.initialize();
-                  $scope.watchbuttons();
-              }
-        ]);
-    </script>
+				  $scope.initialize();
+				  $scope.watchbuttons();
+			  }
+		]);
+	</script>
 </body>
 </html>
