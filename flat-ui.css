@@ -134,7 +134,7 @@ h6,
 }
 
 p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.72222;
     margin: 0 0 15px;
 }
@@ -5006,6 +5006,15 @@ body.vjs-full-window {
     font-weight: normal;
 }
 
+
+.panel-default > .panel-heading {
+    border-color: #6FC44C;
+}
+
+.panel-default > .panel-footer {
+    border-color: #6FC44C;
+}
+
 footer {
     background-color: #edeff1;
     color: #bac1c8;
@@ -5321,10 +5330,6 @@ footer {
 .mhl,
 .mal {
     margin-left: 20px;
-}
-
-.panel-default > .panel-heading{
-    border-color: #6FC44C;
 }
 
 .edit input, .add input {

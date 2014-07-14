@@ -93,23 +93,23 @@
 			<masonry class="col-md-3 col-sm-12 col-xs-12">
 			<div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="background-color:#55acee">
+						<div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
 							<p>
 								<a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
 					as {{tweet.user.screen_name}}</font>
 							</p>
 						</div>
-						<div class="panel-body">
-							{{tweet.text}}
-						</div>
-						<div class="panel-footer">
-							<div>
-								<p class="text-left">
-									<font color="24558F">Location:</font> {{tweet.user.location}}
-								</p>
-							</div>
-							<font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-						</div>
+                        <div class="panel-body" style="border-color:#DDD">
+                            {{tweet.text}}
+                        </div>
+                        <div class="panel-footer" style="border-color:#DDD">
+                            <div>
+                                <p class="text-left">
+                                    <font color="24558F">Location:</font> {{tweet.user.location}}
+                                </p>
+                            </div>
+                            <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                        </div>
 					</div>
 				</div>
 			</masonry>
