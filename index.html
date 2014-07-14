@@ -9,177 +9,7 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> 
 
 	<link href="flat-ui.css" rel="stylesheet" />
-	<style>
-		.edit input, .add input {
-			margin-top: 5px;
-		}
 
-		.userimage {
-			width: 100px;
-		}
-
-		.no-padding, .main-container, .main-container masonry, .main-container masonry > div {
-			padding: 0px !important;
-			offset: 0px !important;
-		}
-
-		.card div {
-			padding: 4px;
-			/*margin: 2.5px;*/
-			margin: auto;
-		}
-
-		.navbar-brand {
-			margin-top: -3px;
-			padding-left: 20px;
-		}
-
-		.navbar-right {
-			padding-right: 5px;
-			margin-right: 0px;
-		}
-
-		.navbar {
-			margin-bottom: 10px;
-			offset: 0px;
-		}
-
-		.main-container {
-			margin-left: 10px;
-			margin-right: 10px;
-		}
-
-		masonry div:only-child {
-			margin: 10px !important;
-			offset: 0px !important;
-		}
-
-		.glyphicon-edit:hover {
-			-webkit-transition: color 1s;
-			transition: color 1s;
-			cursor: pointer;
-			color: #51a051;
-		}
-
-
-		.glyphicon-edit {
-			-webkit-transition: color 1s;
-			transition: color 1s;
-			color: black;
-			float: right;
-			z-index: 2;
-		}
-	</style>
-	<style>
-		@keyframes loadinganimation {
-			0% {
-				background-color: #90db90;
-			}
-
-			30% {
-				background-color: #90db90;
-			}
-
-			50% {
-				background-color: #51a051;
-			}
-
-			70% {
-				background-color: #90db90;
-			}
-
-			100% {
-				background-color: #90db90;
-			}
-		}
-
-		@-webkit-keyframes loadinganimation /* Safari and Chrome */
-		{
-			0% {
-				background-color: #90db90;
-			}
-
-			30% {
-				background-color: #90db90;
-			}
-
-			50% {
-				background-color: #51a051;
-			}
-
-			70% {
-				background-color: #90db90;
-			}
-
-			100% {
-				background-color: #90db90;
-			}
-		}
-
-		#loadingcontainer {
-			display: inline-block;
-			z-index: 2;
-			width: 100%;
-			height: 100%;
-		}
-
-		.loading {
-			z-index: 3;
-			border-radius: 50%;
-			position: absolute;
-			top: 50%;
-			height: 20px;
-			width: 20px;
-		}
-
-			.loading.one {
-				left: 37.5%;
-				animation: loadinganimation 1s infinite;
-				-webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-			}
-
-			.loading.two {
-				left: 42.5%;
-				animation: loadinganimation 1s infinite;
-				-webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-				-webkit-animation-delay: .16s; /* Safari and Chrome */
-				animation-delay: .16s;
-			}
-
-			.loading.three {
-				left: 47.5%;
-				animation: loadinganimation 1s infinite;
-				-webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-				-webkit-animation-delay: .33s; /* Safari and Chrome */
-				animation-delay: .33s;
-			}
-
-			.loading.four {
-				left: 52.5%;
-				animation: loadinganimation 1s infinite;
-				-webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-				-webkit-animation-delay: .5s; /* Safari and Chrome */
-				animation-delay: .5s;
-			}
-
-			.loading.five {
-				left: 57.5%;
-				animation: loadinganimation 1s infinite;
-				-webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-				-webkit-animation-delay: .66s; /* Safari and Chrome */
-				animation-delay: .66s;
-			}
-
-			.loading.six {
-				left: 62.5%;
-				animation: loadinganimation 1s infinite;
-				-webkit-animation: loadinganimation 1s infinite; /* Safari and Chrome */
-				-webkit-animation-delay: .86s; /* Safari and Chrome */
-				animation-delay: .86s;
-			}
-	</style>
-	<style>
-	</style>
 </head>
 <body ng-controller="controller">
 	<div id="loadingcontainer" ng-show="menu == 'loading'">
@@ -201,7 +31,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Stem Labs<sub>Test</sub></a>
+					<a class="navbar-brand" href="https://stemlabs.github.io/">Stem Labs<sub>V5</sub></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -218,7 +48,7 @@
 								<i class="glyphicon glyphicon-chevron-up" ng-show="sortField=='lastname' && ascending"></i>
 								<i class="glyphicon glyphicon-chevron-down" ng-show="sortField=='lastname' && !ascending"></i>
 							</label>
-							<label class="btn btn-lg" ng-click="menu = 'add'">Add</label>
+
 						</div>
 					</ul>
 
@@ -228,6 +58,11 @@
 						</div>
 						<!-- <button type="submit" class="btn btn-default">Submit</button> -->
 					</form>
+					<label class="btn btn-lg navbar-right" ng-click="menu = 'add'">
+						<i class="glyphicon glyphicon-plus"></i>
+						Add
+					   
+					</label>
 				</div>
 			</div>
 		</nav>
