@@ -200,7 +200,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Stem Labs<sub>Beef Stew</sub></a>
+					<a class="navbar-brand" href="#">Stem Labs<sub>V5</sub></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -239,10 +239,10 @@
 							<tr>
 								<td>
 									<div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></br></div>
-									<div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}</br></div>
+									<div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}    </br></div>
 									<div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
 								</td>
-								<td><div><img alt="Person's Picture" class="userimage img-rounded" src="{{ person.imageurl }}" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" /></div></td>
+								<td><div><img alt="Person's Picture" class="userimage img-rounded" src="{{ person.imageurl }}" ng-href="person.imageurl" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" /></div></td>
 							</tr>
 						</table>
 					</div>
