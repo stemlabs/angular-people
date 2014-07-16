@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link href="flat-ui.css" rel="stylesheet" />
 
 </head>
@@ -91,24 +91,30 @@
                 </div>
             </masonry>
             <masonry class="col-md-3 col-sm-12 col-xs-12">
-                <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
-                            <p>
-                                <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
-                                as {{tweet.user.screen_name}}</font>
-                            </p>
-                        </div>
-                        <div class="panel-body" style="border-color:#DDD">
-                            {{tweet.text}}
-                        </div>
-                        <div class="panel-footer" style="border-color:#DDD">
-                            <div>
-                                <p class="text-left">
-                                    <font color="24558F">Location:</font> {{tweet.user.location}}
-                                </p>
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-target="#demo"> Twitter News
+                    </div>
+                    <div id="demo"class="panel-body collapse">
+                        <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
+                                    <p>
+                                        <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
+                                        as {{tweet.user.screen_name}}</font>
+                                    </p>
+                                </div>
+                                <div class="panel-body" style="border-color:#DDD"> 
+                                    {{tweet.text}}
+                                </div>
+                                <div class="panel-footer" style="border-color:#DDD">
+                                    <div>
+                                        <p class="text-left">
+                                            <font color="24558F">Location:</font> {{tweet.user.location}}
+                                        </p>
+                                    </div>
+                                    <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                                </div>
                             </div>
-                            <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
                         </div>
                     </div>
                 </div>
@@ -149,6 +155,8 @@
             </div>
         </div>
     </div>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <!-- Core Functionality -->
     <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
