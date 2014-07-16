@@ -31,7 +31,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="https://stemlabs.github.io/">Stem Labs<sub>V5</sub></a>
+                    <a class="navbar-brand" href="https://stemlabs.github.io/">Stem Labs<sub>Tomato Basil Bisque</sub></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -95,8 +95,7 @@
                     <div class="panel-heading" data-toggle="collapse" data-target="#demo"> Twitter News
                     </div>
                     <div id="demo"class="panel-body collapse">
-                <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
                         <div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
                             <p>
                                 <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
