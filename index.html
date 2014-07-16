@@ -92,31 +92,30 @@
             </masonry>
             <masonry class="col-md-3 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading" data-toggle="collapse" data-target="#demo">
-                        Twitter News
+                    <div class="panel-heading" data-toggle="collapse" data-target="#demo"> Twitter News
                     </div>
-                    <div id="demo" class="panel-body collapse">
-                        <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
-                            <div class="panel panel-default">
-                                <div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
-                                    <p>
-                                        <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
-                                        as {{tweet.user.screen_name}}</font>
-                                    </p>
-                                </div>
-                                <div class="panel-body" style="border-color:#DDD">
-                                    {{tweet.text}}
-                                </div>
-                                <div class="panel-footer" style="border-color:#DDD">
-                                    <div>
-                                        <p class="text-left">
-                                            <font color="24558F">Location:</font> {{tweet.user.location}}
-                                        </p>
-                                    </div>
-                                    <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-                                </div>
-                            </div>
+                    <div id="demo"class="panel-body collapse">
+                <div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
+                            <p>
+                                <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
+                                as {{tweet.user.screen_name}}</font>
+                            </p>
                         </div>
+                        <div class="panel-body" style="border-color:#DDD">
+                            {{tweet.text}}
+                        </div>
+                        <div class="panel-footer" style="border-color:#DDD">
+                            <div>
+                                <p class="text-left">
+                                    <font color="24558F">Location:</font> {{tweet.user.location}}
+                                </p>
+                            </div>
+                            <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                        </div>
+                    </div>
+                </div>
                     </div>
                 </div>
             </masonry>
@@ -178,105 +177,105 @@
     <script>
         var app = angular.module('app', ['wu.masonry', 'DataModule', 'AzureDataModule', 'TwitterDataModule']);
         app.controller('controller', ['$scope', '$timeout', 'dataService', 'azureDataService', 'twitterDataService',
- function ($scope, $timeout, dataService, azureDataService, twitterDataService) {
-     //define global scope variables
-     $scope.sortField = 'firstname';
-     $scope.ascending = true;
-     $scope.currentColumn = 0;
-     $scope.menu = "loading";
-     var timeout = null;
+			  function ($scope, $timeout, dataService, azureDataService, twitterDataService) {
+			      //define global scope variables
+			      $scope.sortField = 'firstname';
+			      $scope.ascending = true;
+			      $scope.currentColumn = 0;
+			      $scope.menu = "loading";
+			      var timeout = null;
 
-     $scope.Delete = function (tableName, entity) {
-         dataService.remove(tableName, entity, function () {
-             //updates the data after you add data
-             $scope.sync();
-         }, function () {
-             console.log('Problem removing the data.');
-         });
+			      $scope.Delete = function (tableName, entity) {
+			          dataService.remove(tableName, entity, function () {
+			              //updates the data after you add data
+			              $scope.sync();
+			          }, function () {
+			              console.log('Problem removing the data.');
+			          });
 
-         $scope.menu = "main";
-         $scope.currentEdit = {};
-     };
+			          $scope.menu = "main";
+			          $scope.currentEdit = {};
+			      };
 
-     //function to add a new data entry
-     $scope.Add = function (tableName, entity) {
-         dataService.add(tableName, entity, function () {
-             //updates the data after you add data
-             $scope.sync();
-         }, function () {
-             console.log('Problem adding data.');
-         });
+			      //function to add a new data entry
+			      $scope.Add = function (tableName, entity) {
+			          dataService.add(tableName, entity, function () {
+			              //updates the data after you add data
+			              $scope.sync();
+			          }, function () {
+			              console.log('Problem adding data.');
+			          });
 
-         $scope.menu = "main";
-         $scope.currentEdit = {};
-     };
+			          $scope.menu = "main";
+			          $scope.currentEdit = {};
+			      };
 
-     $scope.Change = function (tableName, entity) {
-         dataService.update(tableName, entity, function () {
-             $scope.sync();
-         }, function () {
-             console.log('Problem updating data.');
-         });
-         $scope.menu = "main";
-         $scope.currentEdit = {};
+			      $scope.Change = function (tableName, entity) {
+			          dataService.update(tableName, entity, function () {
+			              $scope.sync();
+			          }, function () {
+			              console.log('Problem updating data.');
+			          });
+			          $scope.menu = "main";
+			          $scope.currentEdit = {};
 
-     };
+			      };
 
-     //function to sync the data
-     $scope.sync = function () {
-         // alert("sync");
-         dataService.getEntries(function (results) {
-             for (var result in results) {
-                 $scope.$apply($scope[result] = results[result]);
-             }
-         });
-     }
+			      //function to sync the data
+			      $scope.sync = function () {
+			          // alert("sync");
+			          dataService.getEntries(function (results) {
+			              for (var result in results) {
+			                  $scope.$apply($scope[result] = results[result]);
+			              }
+			          });
+			      }
 
-     //function to intialize the connection
-     $scope.initialize = function () {
-         console.log("Initialize");
-         azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
-         twitterDataService.HashTag = "stemlabs";
-         dataService.addSource(azureDataService);
-         dataService.addSource(twitterDataService);
-         dataService.connect(function (results) {
-             console.log('Data Loaded.');
+			      //function to intialize the connection
+			      $scope.initialize = function () {
+			          console.log("Initialize");
+			          azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
+			          twitterDataService.HashTag = "stemlabs";
+			          dataService.addSource(azureDataService);
+			          dataService.addSource(twitterDataService);
+			          dataService.connect(function (results) {
+			              console.log('Data Loaded.');
 
-             $scope.$apply($scope.menu = "main");
+			              $scope.$apply($scope.menu = "main");
 
-         }, $scope, 4);
-     }
+			          }, $scope, 4);
+			      }
 
-     $scope.Edit = function (person) {
-         $scope.menu = "edit";
-         $scope.currentEdit = person;
-     }
+			      $scope.Edit = function (person) {
+			          $scope.menu = "edit";
+			          $scope.currentEdit = person;
+			      }
 
 
-     $scope.watchbuttons = function () {
-         $scope.$watch('sortField', function () {
-             $scope.ascending = true;
-         });
+			      $scope.watchbuttons = function () {
+			          $scope.$watch('sortField', function () {
+			              $scope.ascending = true;
+			          });
 
-         $scope.$watch(function () {
-             return $scope.sortField + $scope.ascending;
-         }, function () {
-             if ($scope.ascending) {
-                 $scope.directionalSort = '+' + $scope.sortField;
-             } else {
-                 $scope.directionalSort = '-' + $scope.sortField;
-             }
+			          $scope.$watch(function () {
+			              return $scope.sortField + $scope.ascending;
+			          }, function () {
+			              if ($scope.ascending) {
+			                  $scope.directionalSort = '+' + $scope.sortField;
+			              } else {
+			                  $scope.directionalSort = '-' + $scope.sortField;
+			              }
 
-         })
-     }
+			          })
+			      }
 
-     $scope.twitterSort = function (tweet) {
-         return tweet.created_at.substring(3);
-     }
+			      $scope.twitterSort = function (tweet) {
+			          return tweet.created_at.substring(3);
+			      }
 
-     $scope.initialize();
-     $scope.watchbuttons();
- }
+			      $scope.initialize();
+			      $scope.watchbuttons();
+			  }
         ]);
     </script>
 </body>
