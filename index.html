@@ -69,29 +69,6 @@
             </div>
         </nav>
         <div class="main-container row">
-            <masonry class="col-md-9 col-sm-12 col-xs-12">
-                <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
-                    <div class="panel panel-default card">
-                        <div class="panel-heading"> {{ person.firstname }} {{ person.lastname }} <i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
-                        <table>
-                            <tr>
-                                <td>
-                                    <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></br></div>
-                                    <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}    </br></div>
-                                    <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
-                                </td>
-                                <td><div><img alt="Person's Picture" class="userimage img-rounded" src="{{ person.imageurl }}" ng-href="person.imageurl" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" /></div></td>
-                            </tr>
-                        </table>
-                        <div class="panel-footer">
-                            <a href="http://www.skype.com/en/" class="fa fa-skype fa-2x" style="color:#00aff0"></a>
-                            <a href="https://www.facebook.com/" class="fa fa-facebook-square fa-2x" style="color:#3B5999"></a>
-                            <a href="https://twitter.com/" class="fa fa-twitter-square fa-2x" style="color:#55acee"></a>
-                            <a href="http://instagram.com/#" class="fa fa-instagram fa-2x" style="color:#3f729b"></a>
-                        </div>
-                    </div>
-                </div>
-            </masonry>
             <masonry class="col-md-3 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -105,7 +82,7 @@
                                     <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
                                     as {{tweet.user.screen_name}}</font>
                                 </p>
-                               
+
                             </div>
                             <div class="panel-body" style="border-color:#DDD">
                                 {{tweet.text}}
@@ -121,10 +98,34 @@
                         </div>
                     </div>
                 </div>
-        </div>
-        </masonry>
 
-    </div>
+
+            </masonry>
+            <masonry class="col-md-9 col-sm-12 col-xs-12">
+                <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
+                    <div class="panel panel-default card">
+                        <div class="panel-heading"> {{ person.firstname }} {{ person.lastname }} <i ng-click="Edit(person)" class="glyphicon glyphicon-edit"></i></div>
+                            <table>
+                            <tr>
+                                <td>
+                                    <div ng-hide="person.homephone == '' || person.homephone == null" class="panel-body"><a href="tel:{{person.homephone}}">{{ person.homephone }}</a></br></div>
+                                    <div ng-hide="person.address1 == 'h' || person.address1 == null" class="panel-body">{{ person.address1 }}    </br></div>
+                                    <div ng-hide="person.email == '' || person.email == null" class="panel-body"><a href="mailto:{{person.email}}">{{ person.email }}</a></div>
+                                </td>
+                                <td><div><img alt="Person's Picture" class="userimage img-rounded" src="{{ person.imageurl }}" ng-href="person.imageurl" ng-hide="person.imageurl == '' || person.imageurl == null" class="panel-body" /></div></td>
+                            </tr>
+                            </table>
+                        <div class="panel-footer">
+                            <a href="http://www.skype.com/en/" class="fa fa-skype fa-2x" style="color:#00aff0"></a>
+                            <a href="https://www.facebook.com/" class="fa fa-facebook-square fa-2x" style="color:#3B5999"></a>
+                            <a href="https://twitter.com/" class="fa fa-twitter-square fa-2x" style="color:#55acee"></a>
+                            <a href="http://instagram.com/#" class="fa fa-instagram fa-2x" style="color:#3f729b"></a>
+                        </div>
+                    </div>
+                </div>
+            </masonry>
+
+        </div>
     </div>
 
     <div ng-show="menu == 'edit'">
