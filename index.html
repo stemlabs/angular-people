@@ -33,7 +33,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="https://stemlabs.github.io/">Stem Labs<sub>Tomato Basil Bisque</sub></a>
+                    <a class="navbar-brand" href="https://stemlabs.github.io/">Stem Labs<sub>v6.0</sub></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,39 +68,9 @@
                 </div>
             </div>
         </nav>
+      <!--Twitter News bar-->
         <div class="main-container row">
-            <masonry class="col-md-3 col-sm-12 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Twitter News
-                        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                    </div>
-                    <div id="demo" class="panel-body">
-                        <div class="panel panel-default" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
-                            <div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
-                                <p>
-                                    <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
-                                    as {{tweet.user.screen_name}}</font>
-                                </p>
-                               
-                            </div>
-                            <div class="panel-body" style="border-color:#DDD">
-                                {{tweet.text}}
-                            </div>
-                            <div class="panel-footer" style="border-color:#DDD">
-                                <div>
-                                    <p class="text-left">
-                                        <font color="24558F">Location:</font> {{tweet.user.location}}
-                                    </p>
-                                </div>
-                                <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
 
-
-            </masonry>
             <masonry class="col-md-9 col-sm-12 col-xs-12">
                 <div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
                     <div class="panel panel-default card">
@@ -121,10 +91,41 @@
                             <a href="https://twitter.com/" class="fa fa-twitter-square fa-2x" style="color:#55acee"></a>
                             <a href="http://instagram.com/#" class="fa fa-instagram fa-2x" style="color:#3f729b"></a>
                         </div>
+                    </div>
                 </div>
-        </div>
-        </masonry>
+            </masonry>
+            <masonry class="col-md-3 col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Twitter News
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                    </div>
+                    <div id="demo" class="panel-body">
+                        <div class="panel panel-default" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
+                            <div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
+                                <p>
+                                    <a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
+                                    as {{tweet.user.screen_name}}</font>
+                                </p>
 
+                            </div>
+                            <div class="panel-body" style="border-color:#DDD">
+                                {{tweet.text}}
+                            </div>
+                            <div class="panel-footer" style="border-color:#DDD">
+                                <div>
+                                    <p class="text-left">
+                                        <font color="24558F">Location:</font> {{tweet.user.location}}
+                                    </p>
+                                </div>
+                                <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </masonry>
     </div>
     </div>
 
