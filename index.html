@@ -137,7 +137,7 @@
 			<div style="margin-top: 5px;">
 				<button class="btn btn-default" ng-click="Change('people', currentEdit)">Change</button>
 				<button class="btn btn-default" ng-click="Delete('people', currentEdit)">Delete</button>
-				<button class="btn btn-default" ng-click="menu = 'main'; currentEdit={}">Cancel</button>
+				<button class="btn btn-default" ng-click="CancelEditing()">Cancel</button>
 			</div>
 		</div>
 	</div>
@@ -153,7 +153,7 @@
 	  <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
 			<div style="margin-top: 5px;">
 				<button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
-				<button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
+				<button class="btn btn-default" ng-click="CancelEditing()">Cancel</button>
 			</div>
 		</div>
 	</div>
@@ -167,9 +167,9 @@
 
 	<!-- ACDC data connector -->
 	<script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
-	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
-	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
-	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/TwitterService.js"></script>
+	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.5/AngularCloudDataConnector.js"></script>
+	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.5/Providers/AzureService.js"></script>
+	<script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.5/Providers/TwitterService.js"></script>
 
 	<!-- Masonry -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
@@ -273,6 +273,11 @@
 
 				  $scope.twitterSort = function (tweet) {
 					  return tweet.created_at.substring(3);
+				  }
+
+				  $scope.CancelEditing = function () {
+				    menu = 'main';
+				    currentEdit = {};
 				  }
 
 				  $scope.initialize();
