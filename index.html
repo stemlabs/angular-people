@@ -200,36 +200,22 @@
 			    var timeout = null;
 
 			    $scope.Delete = function (tableName, entity) {
-			      dataService.remove(tableName, entity, function () {
-			        //updates the data after you add data
-			        $scope.sync();
-			      }, function () {
-			        console.log('Problem removing the data.');
-			      });
-
+			      dataService.remove(tableName, entity);
+			      dataService.commit();
 			      $scope.menu = "main";
 			      $scope.currentEdit = {};
 			    };
 
 			    //function to add a new data entry
 			    $scope.Add = function (tableName, entity) {
-			      dataService.add(tableName, entity, function () {
-			        //updates the data after you add data
-			        $scope.sync();
-			      }, function () {
-			        console.log('Problem adding data.');
-			      });
-
+			      dataService.add(tableName, entity);
+			      dataService.commit();
 			      $scope.menu = "main";
 			      $scope.currentEdit = {};
 			    };
 
 			    $scope.Change = function (tableName, entity) {
-			      dataService.update(tableName, entity, function () {
-			        $scope.sync();
-			      }, function () {
-			        console.log('Problem updating data.');
-			      });
+			      dataService.commit();
 			      $scope.menu = "main";
 			      $scope.currentEdit = {};
 
@@ -237,12 +223,7 @@
 
 			    //function to sync the data
 			    $scope.sync = function () {
-			      // alert("sync");
-			      dataService.getEntries(function (results) {
-			        for (var result in results) {
-			          $scope.$apply($scope[result] = results[result]);
-			        }
-			      });
+			      dataService.getEntries();
 			    }
 
 			    //function to intialize the connection
@@ -252,7 +233,7 @@
 			    }
 
           $scope.loadData = function () {
-			      azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
+			      azureDataService.addSource($scope.client, null, ['people']);
 			      twitterDataService.HashTag = "stemlabs";
 			      dataService.addSource(azureDataService);
 			      dataService.addSource(twitterDataService);
