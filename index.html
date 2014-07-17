@@ -235,6 +235,10 @@
 			    //function to intialize the connection
 			    $scope.initialize = function () {
 			      console.log("Initialize");
+			      $scope.loadData();
+			    }
+
+          $scope.loadData = function () {
 			      azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
 			      twitterDataService.HashTag = "stemlabs";
 			      dataService.addSource(azureDataService);
@@ -246,6 +250,7 @@
 
 			      }, $scope, 4);
 			    }
+
 
 			    $scope.Edit = function (person) {
 			      $scope.menu = "edit";
@@ -268,6 +273,14 @@
 			        }
 
 			      })
+			    }
+
+			    $scope.login = function () {
+			      var client = new WindowsAzure.MobileServiceClient("https://stemlabs.azure-mobile.net/");
+			      $scope.client = client;
+			      client.login("aad").done(function (results) {
+			        $scope.loadData();
+			      });
 			    }
 
 			    $scope.twitterSort = function (tweet) {
