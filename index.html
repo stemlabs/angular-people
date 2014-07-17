@@ -10,6 +10,13 @@
   <link href="flat-ui.css" rel="stylesheet" />
 </head>
 <body ng-controller="controller">
+
+  <div class="container" ng-hide="client.currentUser">
+    <p>Please login.</p>
+    <button ng-click="login()">Login</button>
+  </div>
+
+
   <div id="loadingcontainer" ng-show="menu == 'loading'">
     <div class="loading one"></div>
     <div class="loading two"></div>
@@ -18,6 +25,8 @@
     <div class="loading five"></div>
     <div class="loading six"></div>
   </div>
+
+  
   <div ng-show="menu == 'main'">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
@@ -48,6 +57,7 @@
               </label>
 
             </div>
+            <div ng-show="client.currentUser">{{ client.currentUser.userId}}</div>
           </ul>
 
           <form class="navbar-form navbar-right" role="search">
@@ -156,6 +166,9 @@
       </div>
     </div>
   </div>
+
+  
+
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
@@ -251,12 +264,10 @@
 			      }, $scope, 4);
 			    }
 
-
 			    $scope.Edit = function (person) {
 			      $scope.menu = "edit";
 			      $scope.currentEdit = person;
 			    }
-
 
 			    $scope.watchbuttons = function () {
 			      $scope.$watch('sortField', function () {
@@ -292,7 +303,6 @@
 			      $scope.currentEdit = {};
 			    }
 
-			    $scope.initialize();
 			    $scope.watchbuttons();
 			  }
     ]);
