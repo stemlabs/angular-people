@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> 
-
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link href="flat-ui.css" rel="stylesheet" />
 </head>
 <body ng-controller="controller">
@@ -30,7 +30,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="https://stemlabs.github.io/">Stem Labs<sub>V5</sub></a>
+                    <a class="navbar-brand" href="https://stemlabs.github.io/">Stem Labs<sub>v6.0</sub></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,6 +65,7 @@
 				</div>
 			</div>
 		</nav>
+      <!--Twitter News bar-->
 		<div class="main-container row">
 			<masonry class="col-md-9 col-sm-12 col-xs-12">
 				<div class="masonry-brick col-xs-12 col-sm-6 col-md-4" ng-repeat="person in people | filter:searchText | orderBy:directionalSort">
@@ -81,38 +82,46 @@
 							</tr>
 						</table>
 						<div class="panel-footer">
-							<a href="http://www.skype.com/en/" class="fa fa-skype fa-2x" style="color:#00aff0"></a>
-							<a href="https://www.facebook.com/" class="fa fa-facebook-square fa-2x" style="color:#3B5999"></a>
-							<a href="https://twitter.com/" class="fa fa-twitter-square fa-2x" style="color:#55acee"></a>
-							<a href="http://instagram.com/#" class="fa fa-instagram fa-2x" style="color:#3f729b"></a>
+                            <a href="http://www.skype.com/en/" class="fa fa-skype fa-2x" style="color:#00aff0"></a>
+                            <a href="https://www.facebook.com/" class="fa fa-facebook-square fa-2x" style="color:#3B5999"></a>
+                            <a href="https://twitter.com/" class="fa fa-twitter-square fa-2x" style="color:#55acee"></a>
+                            <a href="http://instagram.com/#" class="fa fa-instagram fa-2x" style="color:#3f729b"></a>
 						</div>
 					</div>
 				</div>
 			</masonry>
-			<masonry class="col-md-3 col-sm-12 col-xs-12">
-			<div class="masonry-brick col-xs-12" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
+            <masonry class="col-md-3 col-sm-6 col-xs-12">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
+                    <div class="panel-heading">
+                        Twitter News
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                    </div>
+                    <div id="demo" class="panel-body">
+                        <div class="panel panel-default" ng-repeat="tweet in tweets | orderBy:twitterSort:true">
+                            <div class="panel-heading" style="background-color:#55acee; border-color:#DDD">
 							<p>
 								<a class="text-left" ng-href="{{ tweet.user.url }}"><font color="FFFFFF">By {{tweet.user.name}}</a>
 					as {{tweet.user.screen_name}}</font>
 							</p>
+
 						</div>
-                        <div class="panel-body" style="border-color:#DDD">
-                            {{tweet.text}}
+                            <div class="panel-body" style="border-color:#DDD">
+							{{tweet.text}}
+						</div>
+                            <div class="panel-footer" style="border-color:#DDD">
+							<div>
+								<p class="text-left">
+									<font color="24558F">Location:</font> {{tweet.user.location}}
+								</p>
+							</div>
+							<font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
+						</div>
                         </div>
-                        <div class="panel-footer" style="border-color:#DDD">
-                            <div>
-                                <p class="text-left">
-                                    <font color="24558F">Location:</font> {{tweet.user.location}}
-                                </p>
-                            </div>
-                            <font color="24558F"> Hashtags:</font><span ng-repeat="tag in tweet.entities.hashtags" ng-click="hashTag=tag.text">#{{tag.text}} </span>
-                        </div>
-					</div>
+                    </div>
 				</div>
+
+
 			</masonry>
-			
 		</div>
 	</div>
 
@@ -141,13 +150,15 @@
 			<input type="text" ng-model='currentEdit.address1' class="form-control" placeholder="Address" />
 			<input type="text" ng-model='currentEdit.homephone' class="form-control" placeholder="Phone" />
 			<input type="text" ng-model='currentEdit.email' class="form-control" placeholder="Email" />
-	        <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
+	  <input type="text" ng-model='currentEdit.imageurl' class="form-control" placeholder="Image URL" />
 			<div style="margin-top: 5px;">
 				<button class="btn btn-default" ng-click="Add('people', currentEdit)">Add</button>
 				<button class="btn btn-default" ng-click="menu = 'main'">Cancel</button>
 			</div>
 		</div>
 	</div>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 	<!-- Core Functionality -->
 	<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
